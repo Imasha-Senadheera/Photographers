@@ -14,15 +14,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex bg-slate-100">
+    <div className="flex min-h-screen bg-slate-100">
       {/* Sidebar */}
       <div className="w-64 bg-[#28396f] h-screen text-white">
         <div className="py-5 px-9">
           <img src={Logo} alt="Logo" className="mb-9" />
         </div>
         <div className="space-y-2">
-          {" "}
-          {/* Add this div with space-y-2 class */}
           <button
             className={`flex text-left w-full px-5 py-2 ${
               activeButton === "Overview" ? "bg-[#314375]" : ""
