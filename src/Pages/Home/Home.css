@@ -1,0 +1,9 @@
+.home-logo {
+    width: 150px; 
+    height: auto;
+    position: absolute;
+    top: 20px; 
+    left: 40px; 
+    object-fit: contain;
+  }
+  

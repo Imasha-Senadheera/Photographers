@@ -8,19 +8,21 @@ import { CiHeart } from "react-icons/ci";
 import Logo1 from "../../Assests/facebook1.png";
 import Logo2 from "../../Assests/instagram1.png";
 import Logo3 from "../../Assests/linkedin1.png";
-import Logo from "../../Assests/black_logo.png";
+import Logo from "../../Assests/logo.png";
+
+import "./Home.css"; 
 
 const Home = () => {
   return (
     <>
-      <div className="w-full h-80">
+      <div className="w-full h-80 relative">
         <img src={Cover} alt="" className="w-full h-full object-cover" />
+        <img src={Logo} alt="Logo" className="home-logo" /> {/* Add logo here */}
       </div>
 
       <div className="flex bg-slate-100">
         <div className="flex mx-[10%] gap-16 w-full min-h-screen p-10">
           <div className="w-[70%]">
-            {/* Added margin-bottom here */}
             <div className="flex items-center gap-5 pb-5 mb-8">
               <FaUserCircle className="text-6xl" />
               <div>
@@ -79,32 +81,16 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Horizontal Line */}
       <hr className="border-gray-300 mx-[10%] mt-20" />
 
-      {/* Footer Section */}
       <footer className="w-full bg-gray-100 text-black py-6 mt-10">
         <div className="mx-[30%]">
-          {/* Logos Section */}
           <div className="flex justify-center gap-10 mt-6 mb-10">
-            <img
-              src={Logo1}
-              alt="Logo 1"
-              className="w-10 h-10 object-contain"
-            />
-            <img
-              src={Logo2}
-              alt="Logo 2"
-              className="w-10 h-10 object-contain"
-            />
-            <img
-              src={Logo3}
-              alt="Logo 3"
-              className="w-10 h-10 object-contain"
-            />
+            <img src={Logo1} alt="Logo 1" className="w-10 h-10 object-contain" />
+            <img src={Logo2} alt="Logo 2" className="w-10 h-10 object-contain" />
+            <img src={Logo3} alt="Logo 3" className="w-10 h-10 object-contain" />
           </div>
 
-          {/* Explore and Contact Sections */}
           <div className="flex justify-between items-center">
             <div className="flex gap-8">
               <div>
