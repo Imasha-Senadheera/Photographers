@@ -4,6 +4,7 @@ import Layout from '../Components/Layout/Layout'
 import Home from '../Pages/Home/Home'
 // import SinginForm from '../Pages/SignInForm/SignInForm'
 import Dashboard from '../Pages/Dashboard/Dashboard'
+// import MainPage from '../Pages/MainPage/MainPage'
 
 const Router = () => {
     return (
