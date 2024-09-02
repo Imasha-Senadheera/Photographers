@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Cover from "../../Assests/Cover.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import { cardsData } from "../../Constants/MockData";
@@ -10,14 +10,33 @@ import Logo2 from "../../Assests/instagram1.png";
 import Logo3 from "../../Assests/linkedin1.png";
 import Logo from "../../Assests/logo.png";
 
-import "./Home.css"; 
+import "./Home.css";
 
 const Home = () => {
+  const [reviewIndex, setReviewIndex] = useState(0);
+  const reviews = [
+    "Review 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Review 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Review 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  ];
+
+  const handlePrevReview = () => {
+    setReviewIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : reviews.length - 1
+    );
+  };
+
+  const handleNextReview = () => {
+    setReviewIndex((prevIndex) =>
+      prevIndex < reviews.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
   return (
     <>
       <div className="w-full h-80 relative">
         <img src={Cover} alt="" className="w-full h-full object-cover" />
-        <img src={Logo} alt="Logo" className="home-logo" /> {/* Add logo here */}
+        <img src={Logo} alt="Logo" className="home-logo" />
       </div>
 
       <div className="flex bg-slate-100">
@@ -77,6 +96,45 @@ const Home = () => {
                 dolor sit amet, consectetur adipisicing elit.
               </div>
             </div>
+            <div className="relative flex justify-center">
+              <div className="relative w-[400px] overflow-hidden">
+                <div className="flex">
+                  {reviews.map((review, index) => {
+                    const [reviewerName, reviewText] = review.split(":");
+                    return (
+                      <div
+                        key={index}
+                        className={`flex-shrink-0 w-[400px] p-6 border-2 border-blue-700 ${
+                          index === reviewIndex ? "block" : "hidden"
+                        }`}
+                      >
+                        <p className="text-xl text-blue-700 font-bold text-center">
+                          Customer Review
+                        </p>
+                        <p className="text-sm mt-2 text-center">
+                          <span className="font-bold">{reviewerName}:</span>{" "}
+                          {reviewText}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Previous Arrow Button */}
+                <button
+                  onClick={handlePrevReview}
+                  className="absolute top-1/2 left-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
+                >
+                  &lt;
+                </button>
+                {/* Next Arrow Button */}
+                <button
+                  onClick={handleNextReview}
+                  className="absolute top-1/2 right-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
+                >
+                  &gt;
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,9 +144,21 @@ const Home = () => {
       <footer className="w-full bg-gray-100 text-black py-6 mt-10">
         <div className="mx-[30%]">
           <div className="flex justify-center gap-10 mt-6 mb-10">
-            <img src={Logo1} alt="Logo 1" className="w-10 h-10 object-contain" />
-            <img src={Logo2} alt="Logo 2" className="w-10 h-10 object-contain" />
-            <img src={Logo3} alt="Logo 3" className="w-10 h-10 object-contain" />
+            <img
+              src={Logo1}
+              alt="Logo 1"
+              className="w-10 h-10 object-contain"
+            />
+            <img
+              src={Logo2}
+              alt="Logo 2"
+              className="w-10 h-10 object-contain"
+            />
+            <img
+              src={Logo3}
+              alt="Logo 3"
+              className="w-10 h-10 object-contain"
+            />
           </div>
 
           <div className="flex justify-between items-center">
