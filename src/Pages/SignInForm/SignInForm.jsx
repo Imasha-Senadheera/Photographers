@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignInForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
 import googleImage from "../../Assests/google.png";
 
-
 function SignInForm() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard"); // Redirect after successful login
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div className="signin-container">
@@ -31,18 +62,20 @@ function SignInForm() {
       </div>
       <div className="right-section">
         <h1>Sign In</h1>
-        <form className="signin-form">
+        <form className="signin-form" onSubmit={handleSubmit}>
           <input
             type="text"
-            id="email"
             name="email"
             placeholder="Email or Username"
+            value={formData.email}
+            onChange={handleChange}
           />
           <input
             type="password"
-            id="password"
             name="password"
             placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
           />
           <div className="forgot-password">Forgot password?</div>
           <button type="submit">Login</button>
