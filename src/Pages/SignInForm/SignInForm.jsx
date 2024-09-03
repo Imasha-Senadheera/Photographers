@@ -7,10 +7,7 @@ import googleImage from "../../Assests/google.png";
 
 function SignInForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,26 +16,35 @@ function SignInForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Login failed:", errorData);
         alert(errorData.message || "Login failed");
         return;
       }
 
       const data = await response.json();
-      console.log("Login successful:", data);
       localStorage.setItem("token", data.token);
-      navigate("/dashboard"); // Redirect after successful login
+
+      if (data.userType === "photographer") {
+        navigate("/photographer-dashboard");
+      } else if (data.userType === "customer") {
+        navigate("/customer-dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred during login. Please try again.");
@@ -82,7 +88,6 @@ function SignInForm() {
             value={formData.password}
             onChange={handleChange}
           />
-          <div className="forgot-password">Forgot password?</div>
           <button type="submit">Login</button>
         </form>
         <div className="social-login">

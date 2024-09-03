@@ -16,10 +16,6 @@ function SignUpForm() {
     confirmPassword: "",
   });
 
-  const handleLoginClick = () => {
-    navigate("/signin");
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -27,20 +23,17 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate form data
     if (formData.password !== formData.confirmPassword) {
       return alert("Passwords do not match!");
     }
     try {
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         navigate("/signin"); // Redirect after successful registration
       } else {
@@ -62,7 +55,10 @@ function SignUpForm() {
             If you already have an account
             <br />
             You can{" "}
-            <button className="login-button" onClick={handleLoginClick}>
+            <button
+              className="login-button"
+              onClick={() => navigate("/signin")}
+            >
               Login here!
             </button>
           </p>
@@ -119,7 +115,7 @@ function SignUpForm() {
             value={formData.confirmPassword}
             onChange={handleChange}
           />
-          <button type="submit">Register</button>
+          <button type="submit">Sign Up</button>
         </form>
         <div className="social-login">
           <p>or continue with</p>

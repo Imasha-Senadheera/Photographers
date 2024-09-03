@@ -12,9 +12,8 @@ const Header = ({ isMainPage }) => {
 
   const loginLogoutHandler = () => {
     if (!isLogged) {
-      localStorage.setItem("isLogged", true);
-      setIsLogged(true);
-      navigate("/dashboard");
+      // Navigate to the sign-in page if not logged in
+      navigate("/signin");
     } else {
       localStorage.removeItem("isLogged");
       setIsLogged(false);
