@@ -9,6 +9,7 @@ import Logo1 from "../../Assests/facebook1.png";
 import Logo2 from "../../Assests/instagram1.png";
 import Logo3 from "../../Assests/linkedin1.png";
 import Logo from "../../Assests/logo.png";
+import Logo4 from "../../Assests/black_logo.png";
 
 import "./Home.css";
 
@@ -140,59 +141,94 @@ const Home = () => {
       </div>
 
       <hr className="border-gray-300 mx-[10%] mt-20" />
-
-      <footer className="w-full bg-gray-100 text-black py-6 mt-10">
-        <div className="mx-[30%]">
-          <div className="flex justify-center gap-10 mt-6 mb-10">
+      <footer className="w-full bg-gray-100 text-black py-8 mt-10">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center gap-16 mt-6 mb-10">
             <img
               src={Logo1}
               alt="Logo 1"
-              className="w-10 h-10 object-contain"
+              className="w-16 h-16 object-contain"
             />
             <img
               src={Logo2}
               alt="Logo 2"
-              className="w-10 h-10 object-contain"
+              className="w-16 h-16 object-contain"
             />
             <img
               src={Logo3}
               alt="Logo 3"
-              className="w-10 h-10 object-contain"
+              className="w-16 h-16 object-contain"
             />
           </div>
 
-          <div className="flex justify-between items-center">
-            <div className="flex gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div className="flex gap-16 md:gap-24">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Explore</h3>
-                <ul className="space-y-1">
-                  <li>Home</li>
-                  <li>About Us</li>
-                  <li>FAQs</li>
+                <h3 className="text-xl font-semibold mb-4">Explore</h3>
+                <ul className="space-y-2">
+                  <li className="hover:text-blue-500 transition-colors">
+                    Home
+                  </li>
+                  <li className="hover:text-blue-500 transition-colors">
+                    About Us
+                  </li>
+                  <li className="hover:text-blue-500 transition-colors">
+                    FAQs
+                  </li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Contact Us</h3>
-                <ul className="space-y-1">
-                  <li>Email: example@example.com</li>
-                  <li>Phone: 0771234567</li>
+                <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+                <ul className="space-y-2">
+                  <li>
+                    Email:{" "}
+                    <a
+                      href="mailto:example@example.com"
+                      className="hover:text-blue-500 transition-colors"
+                    >
+                      grapherslk@gmail.com
+                    </a>
+                  </li>
+                  <li>
+                    Phone:{" "}
+                    <a
+                      href="tel:+0771234567"
+                      className="hover:text-blue-500 transition-colors"
+                    >
+                      +94771234567
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
-            <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="w-14 h-14 object-contain" />
-              <p className="mt-2">Stay Connected</p>
+            <div className="flex flex-col items-center mt-8 md:mt-0">
+              <img
+                src={Logo4}
+                alt="Logo"
+                className="w-24 h-24 object-contain mb-2"
+              />
+              <p className="text-lg font-medium">Stay Connected</p>
             </div>
           </div>
-        </div>
 
-        <hr className="border-gray-300 mt-6" />
-        <p className="text-center text-sm text-gray-600 mt-4">
-          © 2024 Your Company Name. All rights reserved.
-        </p>
-        <p className="text-center text-sm text-gray-600">
-          Terms and Conditions | Privacy Policy
-        </p>
+          <hr className="border-gray-300 mt-6 mb-4" />
+          <p className="text-center text-sm text-gray-600 mb-2">
+            © 2024 Group 09 - BIT 03 - Final Project. All rights reserved.
+          </p>
+          <p className="text-center text-sm text-gray-600">
+            <a href="/terms" className="hover:text-blue-500 transition-colors">
+              Terms and Conditions
+            </a>{" "}
+            |
+            <a
+              href="/privacy"
+              className="hover:text-blue-500 transition-colors"
+            >
+              {" "}
+              Privacy Policy
+            </a>
+          </p>
+        </div>
       </footer>
     </>
   );

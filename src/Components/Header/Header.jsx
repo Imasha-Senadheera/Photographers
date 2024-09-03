@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
-// import logo from "../../Assests/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -24,7 +23,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex bg-black text-white py-4 px-6 items-center">
+    <div className="flex bg-black text-white py-6 px-6 items-center font-bold">
       <div className="flex-grow flex justify-center">
         {!isLogged ? (
           <div className="flex gap-12">
