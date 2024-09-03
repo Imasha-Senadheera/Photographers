@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Cover from "../../Assests/Cover.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
-import { cardsData } from "../../Constants/MockData";
-import ImageCard from "../../Components/ImageCard/ImageCard";
 import { AiFillInstagram } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import Logo1 from "../../Assests/facebook1.png";
@@ -10,7 +8,8 @@ import Logo2 from "../../Assests/instagram1.png";
 import Logo3 from "../../Assests/linkedin1.png";
 import Logo from "../../Assests/logo.png";
 import Logo4 from "../../Assests/black_logo.png";
-
+import { cardsData } from "../../Constants/MockData";
+import ImageCard from "../../Components/ImageCard/ImageCard";
 import "./Home.css";
 
 const Home = () => {
@@ -36,7 +35,7 @@ const Home = () => {
   return (
     <>
       <div className="w-full h-80 relative">
-        <img src={Cover} alt="" className="w-full h-full object-cover" />
+        <img src={Cover} alt="Cover" className="w-full h-full object-cover" />
         <img src={Logo} alt="Logo" className="home-logo" />
       </div>
 
@@ -62,7 +61,7 @@ const Home = () => {
             </div>
           </div>
           <div className="w-[30%] font-semibold">
-            <div className="flex gap-5">
+            <div className="flex gap-5 mb-10">
               <button className="flex gap-3 items-center justify-center bg-white text-black rounded w-full h-10 border-2 border-blue-700">
                 <CiHeart className="text-red-400" />
                 Like
@@ -73,29 +72,35 @@ const Home = () => {
             </div>
             <div className="my-10 p-6 border-2 border-blue-700">
               <p className="text-xl text-blue-700 font-bold">About</p>
-              <div className="text-sm mt-2">
+              <ul className="text-sm mt-2 list-disc pl-5">
                 <li>Joined on: 01/25/2022</li>
                 <li>Jobs done: 5</li>
                 <li>Experience: 2 years</li>
                 <li>Price range: 80000-120000</li>
                 <li>Category: Wedding, Birthdays, Party</li>
-              </div>
+              </ul>
             </div>
             <div className="my-10 p-6 border-2 border-blue-700">
               <p className="text-xl text-blue-700 font-bold">Social Links</p>
               <div className="flex gap-5 text-4xl mt-2">
-                <FaFacebook />
-                <FaWhatsapp />
-                <AiFillInstagram />
+                <a href="https://facebook.com" aria-label="Facebook">
+                  <FaFacebook />
+                </a>
+                <a href="https://whatsapp.com" aria-label="WhatsApp">
+                  <FaWhatsapp />
+                </a>
+                <a href="https://instagram.com" aria-label="Instagram">
+                  <AiFillInstagram />
+                </a>
               </div>
             </div>
             <div className="my-10 p-6 border-2 border-blue-700">
               <p className="text-xl text-blue-700 font-bold">Description</p>
-              <div className="flex gap-5 mt-2 text-sm">
+              <p className="text-sm mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
                 ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum
                 dolor sit amet, consectetur adipisicing elit.
-              </div>
+              </p>
             </div>
             <div className="relative flex justify-center">
               <div className="relative w-[400px] overflow-hidden">
@@ -120,14 +125,12 @@ const Home = () => {
                     );
                   })}
                 </div>
-                {/* Previous Arrow Button */}
                 <button
                   onClick={handlePrevReview}
                   className="absolute top-1/2 left-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
                 >
                   &lt;
                 </button>
-                {/* Next Arrow Button */}
                 <button
                   onClick={handleNextReview}
                   className="absolute top-1/2 right-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
@@ -146,17 +149,17 @@ const Home = () => {
           <div className="flex justify-center gap-16 mt-6 mb-10">
             <img
               src={Logo1}
-              alt="Logo 1"
+              alt="Facebook Logo"
               className="w-16 h-16 object-contain"
             />
             <img
               src={Logo2}
-              alt="Logo 2"
+              alt="Instagram Logo"
               className="w-16 h-16 object-contain"
             />
             <img
               src={Logo3}
-              alt="Logo 3"
+              alt="LinkedIn Logo"
               className="w-16 h-16 object-contain"
             />
           </div>
@@ -166,14 +169,29 @@ const Home = () => {
               <div>
                 <h3 className="text-xl font-semibold mb-4">Explore</h3>
                 <ul className="space-y-2">
-                  <li className="hover:text-blue-500 transition-colors">
-                    Home
+                  <li>
+                    <a
+                      href="/"
+                      className="hover:text-blue-500 transition-colors"
+                    >
+                      Home
+                    </a>
                   </li>
-                  <li className="hover:text-blue-500 transition-colors">
-                    About Us
+                  <li>
+                    <a
+                      href="/about"
+                      className="hover:text-blue-500 transition-colors"
+                    >
+                      About Us
+                    </a>
                   </li>
-                  <li className="hover:text-blue-500 transition-colors">
-                    FAQs
+                  <li>
+                    <a
+                      href="/faqs"
+                      className="hover:text-blue-500 transition-colors"
+                    >
+                      FAQs
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -183,7 +201,7 @@ const Home = () => {
                   <li>
                     Email:{" "}
                     <a
-                      href="mailto:example@example.com"
+                      href="mailto:grapherslk@gmail.com"
                       className="hover:text-blue-500 transition-colors"
                     >
                       grapherslk@gmail.com
@@ -192,7 +210,7 @@ const Home = () => {
                   <li>
                     Phone:{" "}
                     <a
-                      href="tel:+0771234567"
+                      href="tel:+94771234567"
                       className="hover:text-blue-500 transition-colors"
                     >
                       +94771234567
@@ -210,24 +228,6 @@ const Home = () => {
               <p className="text-lg font-medium">Stay Connected</p>
             </div>
           </div>
-
-          <hr className="border-gray-300 mt-6 mb-4" />
-          <p className="text-center text-sm text-gray-600 mb-2">
-            © 2024 Group 09 - BIT 03 - Final Project. All rights reserved.
-          </p>
-          <p className="text-center text-sm text-gray-600">
-            <a href="/terms" className="hover:text-blue-500 transition-colors">
-              Terms and Conditions
-            </a>{" "}
-            |
-            <a
-              href="/privacy"
-              className="hover:text-blue-500 transition-colors"
-            >
-              {" "}
-              Privacy Policy
-            </a>
-          </p>
         </div>
       </footer>
     </>
