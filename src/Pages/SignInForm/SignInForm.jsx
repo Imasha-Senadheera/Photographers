@@ -27,16 +27,21 @@ function SignInForm() {
         },
         body: JSON.stringify(formData),
       });
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/dashboard"); // Redirect after successful login
-      } else {
-        alert(data.message || "Login failed");
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Login failed:", errorData);
+        alert(errorData.message || "Login failed");
+        return;
       }
+
+      const data = await response.json();
+      console.log("Login successful:", data);
+      localStorage.setItem("token", data.token);
+      navigate("/dashboard"); // Redirect after successful login
     } catch (error) {
       console.error("Error:", error);
+      alert("An error occurred during login. Please try again.");
     }
   };
 
