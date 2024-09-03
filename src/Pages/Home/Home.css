@@ -1,9 +1,185 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.bg-light-blue {
+  background-color: #ffffff;
+}
+
 .home-logo {
-    width: 150px; 
-    height: auto;
-    position: absolute;
-    top: 20px; 
-    left: 40px; 
-    object-fit: contain;
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  object-fit: contain;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .home-logo {
+    width: 120px;
+    top: 15px;
+    left: 20px;
   }
-  
+
+  .flex {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .text-6xl {
+    font-size: 3rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .p-10 {
+    padding: 10px;
+  }
+
+  .gap-16 {
+    gap: 10px;
+  }
+
+  .p-6 {
+    padding: 15px;
+  }
+
+  .my-10 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .relative {
+    width: 100%;
+  }
+
+  .border-2 {
+    border-width: 1px;
+  }
+
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .gap-5 {
+    gap: 10px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .object-cover {
+    object-fit: cover;
+  }
+
+  .h-80 {
+    height: 50vh;
+  }
+
+  .min-h-screen {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-logo {
+    width: 100px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .text-6xl {
+    font-size: 2rem;
+  }
+
+  .text-2xl {
+    font-size: 1.25rem;
+  }
+
+  .text-xl {
+    font-size: 1rem;
+  }
+
+  .text-sm {
+    font-size: 0.75rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gap-4 {
+    gap: 5px;
+  }
+
+  .p-6 {
+    padding: 10px;
+  }
+
+  .my-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .h-80 {
+    height: 30vh;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .gap-3 {
+    gap: 5px;
+  }
+
+  .bg-white {
+    padding: 10px;
+  }
+}
+
+/* Additional Styles */
+.modal-content {
+  border-radius: 0.5rem;
+}
+
+.footer {
+  background-color: #e0f2fe;
+  color: #000;
+  padding: 2rem 0;
+}
+
+.footer hr {
+  border-color: #b0bec5;
+}
+
+.footer a {
+  color: #000;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #1e88e5;
+  transition: color 0.3s;
+}

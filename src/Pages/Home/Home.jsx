@@ -96,7 +96,7 @@ const Home = () => {
                 <li>Joined on: 01/25/2022</li>
                 <li>Jobs done: 5</li>
                 <li>Experience: 2 years</li>
-                <li>Price range: 80000-120000</li>
+                <li>Price range: Rs. 80,000 - Rs. 120,000</li>
                 <li>Category: Wedding, Birthdays, Party</li>
               </ul>
             </div>
