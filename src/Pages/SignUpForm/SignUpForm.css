@@ -4,7 +4,7 @@
 /* General styles */
 body {
   margin: 0;
-  font-family: "Raleway", sans-serif; 
+  font-family: "Raleway", sans-serif;
 }
 
 /* Styles for the signup container */
@@ -24,23 +24,22 @@ body {
   padding: 50px;
   color: white;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Updated logo styling */
+/* Logo styling */
 .logo {
   width: 200px;
   height: auto;
   position: absolute;
-  top: 40px;
-  left: 60px;
+  top: 20px;
+  left: 20px;
 }
 
 /* Text content styling */
 .text-content {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
   text-align: left;
   font-family: "Raleway", sans-serif;
 }
@@ -48,24 +47,16 @@ body {
 .text-content h1 {
   font-size: 4rem;
   margin: 20px 0;
-  font-family: "Raleway", sans-serif;
 }
 
 .text-content h2 {
   font-size: 3rem;
   margin-bottom: 20px;
-  font-family: "Raleway", sans-serif;
 }
 
 .text-content p {
   font-size: 1rem;
   line-height: 1.5;
-  font-family: "Raleway", sans-serif;
-}
-
-.text-content p a {
-  color: #ffffff;
-  text-decoration: none;
 }
 
 .login-button {
@@ -95,7 +86,7 @@ body {
 }
 
 .right-section h1 {
-  margin-bottom: 40px; 
+  margin-bottom: 40px;
 }
 
 .signup-form {
@@ -112,23 +103,16 @@ body {
   font-size: 1rem;
   border-radius: 5px;
   border: none;
-  margin-bottom: 20px; 
-  font-family: "Raleway", sans-serif; 
+  margin-bottom: 20px;
+  font-family: "Raleway", sans-serif;
 }
 
-/* Added gap below the last input field */
 .signup-form input:last-of-type {
-  margin-bottom: 50px; 
+  margin-bottom: 50px;
 }
 
-/* Placeholder styling */
-.signup-form input::placeholder {
-  font-family: "Raleway", sans-serif; 
-}
-
-/* Update register button to match input width */
 .signup-form button {
-  width: 425px; 
+  width: 100%;
   padding: 15px;
   font-size: 1rem;
   background-color: #1844bc;
@@ -140,7 +124,7 @@ body {
 }
 
 .signup-form button:hover {
-  background-color: #0a3d8e; 
+  background-color: #0a3d8e;
 }
 
 /* Social login styling */
@@ -148,9 +132,8 @@ body {
   text-align: center;
 }
 
-/* Adjusted gap between text and social icons */
 .social-login p {
-  margin: 35px 0; 
+  margin: 35px 0;
 }
 
 .social-icons {
@@ -168,16 +151,71 @@ body {
 @media (max-width: 768px) {
   .signup-container {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  .left-section,
+  .left-section {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .logo {
+    width: 150px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .text-content {
+    top: unset;
+    left: unset;
+    transform: none;
+  }
+
+  .text-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .text-content h2 {
+    font-size: 2rem;
+  }
+
   .right-section {
     width: 100%;
     padding: 20px;
   }
+
+  .signup-form {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .signup-form input {
+    padding: 10px;
+  }
+
+  .signup-form button {
+    padding: 10px;
+  }
+
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
+  .logo {
+    width: 120px;
+  }
+
+  .signup-container {
+    background-size: cover;
+    background-position: center;
+  }
+
   .text-content h1 {
     font-size: 2rem;
   }
@@ -189,24 +227,19 @@ body {
   .signup-form input {
     font-size: 0.9rem;
     padding: 8px;
-    margin-bottom: 15px;
-  }
-
-  .signup-form input:last-of-type {
-    margin-bottom: 20px; 
   }
 
   .signup-form button {
     font-size: 0.9rem;
-    padding: 10px;
+    padding: 8px;
   }
 
   .social-login p {
-    margin: 20px 0; 
+    margin: 20px 0;
   }
 
   .social-icons img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 }

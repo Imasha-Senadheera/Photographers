@@ -24,6 +24,9 @@ body {
   padding: 50px;
   color: white;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Logo styles */
@@ -37,11 +40,7 @@ body {
 
 /* Text content styling */
 .text-content {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  text-align: left;
+  text-align: left; /* Ensure left alignment */
   font-family: "Raleway", sans-serif;
 }
 
@@ -61,11 +60,6 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   font-family: "Raleway", sans-serif;
-}
-
-.text-content p a {
-  color: #ffffff;
-  text-decoration: none;
 }
 
 .signup-button {
@@ -125,7 +119,7 @@ body {
 }
 
 .signin-form button {
-  width: 425px;
+  width: 100%;
   padding: 15px;
   font-size: 1rem;
   background-color: #1844bc;
@@ -171,9 +165,62 @@ body {
     width: 100%;
     padding: 20px;
   }
+
+  .logo {
+    width: 150px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Remove text-align: center to keep text left-aligned */
+  .text-content {
+    text-align: left;
+    transform: none; /* Remove any transforms if present */
+  }
+
+  .text-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .text-content h2 {
+    font-size: 2rem;
+  }
+
+  .right-section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .signin-form {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .signin-form input {
+    padding: 10px;
+  }
+
+  .signin-form button {
+    padding: 10px;
+  }
+
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
+  .logo {
+    width: 120px;
+  }
+
+  .signin-container {
+    background-size: cover;
+    background-position: center;
+  }
+
   .text-content h1 {
     font-size: 2rem;
   }
@@ -185,20 +232,15 @@ body {
   .signin-form input {
     font-size: 0.9rem;
     padding: 8px;
-    margin-bottom: 15px;
   }
 
   .signin-form button {
     font-size: 0.9rem;
-    padding: 10px;
-  }
-
-  .social-login p {
-    margin: 20px 0;
+    padding: 8px;
   }
 
   .social-icons img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 }

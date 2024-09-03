@@ -1,15 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom";
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
 import googleImage from "../../Assests/google.png";
 
 function SignUpForm() {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/signin"); // Navigate to the SignInForm page
+    navigate("/signin");
   };
 
   return (
@@ -33,7 +33,7 @@ function SignUpForm() {
         <h1>Sign Up</h1>
         <form className="signup-form">
           <input type="email" placeholder="Enter Email" />
-          <input type="text" placeholder="Create User name" />
+          <input type="text" placeholder="Create Username" />
           <input type="tel" placeholder="Contact number" />
           <input type="password" placeholder="Password" />
           <input type="password" placeholder="Confirm Password" />
