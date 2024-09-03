@@ -4,11 +4,11 @@ import { FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { cardsData } from "../../Constants/MockData";
 import ImageCard from "../ImageCard/ImageCard";
 import { IoIosAddCircle } from "react-icons/io";
-// import Footer from '../Footer/Footer'; 
+// import Footer from '../Footer/Footer';
 
 const AddPhotos = () => {
   return (
-    <div className="flex flex-col lg:flex-row gap-9 p-8 h-screen">
+    <div className="flex flex-col lg:flex-row gap-9 p-8 bg-light-blue h-screen">
       {/* Profile Form */}
       <div className="flex-1 max-h-full overflow-y-auto">
         <p className="text-blue-700 font-semibold text-xl mb-4">Profile</p>
@@ -22,7 +22,7 @@ const AddPhotos = () => {
                 <input
                   type="text"
                   placeholder="Enter your first name"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
 
@@ -33,7 +33,7 @@ const AddPhotos = () => {
                 <input
                   type="text"
                   placeholder="Enter your last name"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
             </div>
@@ -45,7 +45,7 @@ const AddPhotos = () => {
               <input
                 type="text"
                 placeholder="Enter your organization name"
-                className="border rounded px-4 py-2 w-full"
+                className="border rounded px-4 py-2 w-full border-gray-400"
               />
             </div>
 
@@ -56,7 +56,7 @@ const AddPhotos = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="border rounded px-4 py-2 w-full"
+                className="border rounded px-4 py-2 w-full border-gray-400"
               />
             </div>
 
@@ -90,7 +90,7 @@ const AddPhotos = () => {
                     type="text"
                     id="fileInputText"
                     placeholder="Select a file"
-                    className="border rounded px-4 py-2 w-full cursor-pointer"
+                    className="border rounded px-4 py-2 w-full cursor-pointer border-gray-400"
                     readOnly
                     onClick={() => document.getElementById("fileInput").click()}
                   />
@@ -104,7 +104,7 @@ const AddPhotos = () => {
                 <input
                   type="text"
                   placeholder="Enter your experience"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ const AddPhotos = () => {
                 <input
                   type="text"
                   placeholder="Enter your category"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
 
@@ -128,7 +128,7 @@ const AddPhotos = () => {
                 <input
                   type="tel"
                   placeholder="Enter your contact number"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
             </div>
@@ -141,7 +141,7 @@ const AddPhotos = () => {
                 <input
                   type="number"
                   placeholder="Enter the minimum price"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
 
@@ -152,7 +152,7 @@ const AddPhotos = () => {
                 <input
                   type="number"
                   placeholder="Enter the maximum price"
-                  className="border rounded px-4 py-2 w-full"
+                  className="border rounded px-4 py-2 w-full border-gray-400"
                 />
               </div>
             </div>
@@ -163,7 +163,7 @@ const AddPhotos = () => {
               </label>
               <textarea
                 placeholder="Enter a description"
-                className="border rounded px-4 py-2 w-full"
+                className="border rounded px-4 py-2 w-full border-gray-400"
                 rows="4"
               ></textarea>
             </div>
@@ -186,9 +186,7 @@ const AddPhotos = () => {
               Save
             </button>
           </div>
-          
         </form>
-
       </div>
 
       {/* Add Photos Section */}
@@ -223,10 +221,7 @@ const AddPhotos = () => {
           </div>
         </div>
       </div>
-      
-      
     </div>
-    
   );
 };
 

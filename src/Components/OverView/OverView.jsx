@@ -2,12 +2,12 @@ import React from "react";
 import Chart from "../../Components/OverviewComponents/Chart";
 import TodoList from "../../Components/OverviewComponents/TodoList";
 import MyCalendar from "../../Components/OverviewComponents/Calendar";
-import Footer from '../Footer/Footer'; 
+import Footer from "../Footer/Footer";
 
 const OverView = () => {
   return (
-    <div className="bg-slate-100 flex flex-col min-h-screen">
-      <div className="flex-grow px-32 pb-32">
+    <div className="bg-light-blue flex flex-col min-h-screen">
+      <div className="flex-grow bg-light-blue px-32 pb-32">
         <div className="grid grid-cols-4 gap-6 mb-8">
           <div className="bg-white border-2 border-blue-700 rounded-lg p-5">
             <p className="text-gray-500 font-semibold text-center">
@@ -42,7 +42,7 @@ const OverView = () => {
         <TodoList />
         <MyCalendar />
       </div>
-      
+
       {/* Footer at the bottom */}
       <Footer />
     </div>

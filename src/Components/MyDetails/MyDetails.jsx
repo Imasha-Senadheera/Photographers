@@ -1,11 +1,13 @@
-import React from 'react';
-import Footer from '../../Components/Footer/Footer'; // Adjust the path as needed
+import React from "react";
+import Footer from "../../Components/Footer/Footer"; 
 
 const MyDetails = () => {
   return (
-    <div className="p-8 bg-gray-100 min-h-screen flex flex-col">
+    <div className="p-8 bg-light-blue min-h-screen flex flex-col">
       <div className="flex-grow">
-        <h1 className="text-blue-700 font-semibold text-3xl mb-6">My Details</h1>
+        <h1 className="text-blue-700 font-semibold text-3xl mb-6">
+          My Details
+        </h1>
         <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
           <div className="mb-4">
             <p className="text-lg font-semibold">Full Name:</p>
@@ -34,7 +36,9 @@ const MyDetails = () => {
           <div>
             <p className="text-lg font-semibold">Description:</p>
             <p className="text-gray-700">
-              Experienced web developer with a passion for creating beautiful and functional websites. Adept at working with various technologies and frameworks.
+              Experienced web developer with a passion for creating beautiful
+              and functional websites. Adept at working with various
+              technologies and frameworks.
             </p>
           </div>
         </div>

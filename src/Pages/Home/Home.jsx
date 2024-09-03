@@ -34,12 +34,12 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full h-80 relative">
+      <div className="w-full h-80 relative bg-light-blue">
         <img src={Cover} alt="Cover" className="w-full h-full object-cover" />
         <img src={Logo} alt="Logo" className="home-logo" />
       </div>
 
-      <div className="flex bg-slate-100">
+      <div className="flex bg-light-blue">
         <div className="flex mx-[10%] gap-16 w-full min-h-screen p-10">
           <div className="w-[70%]">
             <div className="flex items-center gap-5 pb-5 mb-8">
@@ -70,7 +70,7 @@ const Home = () => {
                 Add Review
               </button>
             </div>
-            <div className="my-10 p-6 border-2 border-blue-700">
+            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
               <p className="text-xl text-blue-700 font-bold">About</p>
               <ul className="text-sm mt-2 list-disc pl-5">
                 <li>Joined on: 01/25/2022</li>
@@ -80,7 +80,7 @@ const Home = () => {
                 <li>Category: Wedding, Birthdays, Party</li>
               </ul>
             </div>
-            <div className="my-10 p-6 border-2 border-blue-700">
+            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
               <p className="text-xl text-blue-700 font-bold">Social Links</p>
               <div className="flex gap-5 text-4xl mt-2">
                 <a href="https://facebook.com" aria-label="Facebook">
@@ -94,7 +94,7 @@ const Home = () => {
                 </a>
               </div>
             </div>
-            <div className="my-10 p-6 border-2 border-blue-700">
+            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
               <p className="text-xl text-blue-700 font-bold">Description</p>
               <p className="text-sm mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
@@ -112,7 +112,7 @@ const Home = () => {
                         key={index}
                         className={`flex-shrink-0 w-[400px] p-6 border-2 border-blue-700 ${
                           index === reviewIndex ? "block" : "hidden"
-                        }`}
+                        } bg-white`}
                       >
                         <p className="text-xl text-blue-700 font-bold text-center">
                           Customer Review
@@ -144,7 +144,7 @@ const Home = () => {
       </div>
 
       <hr className="border-gray-300 mx-[10%] mt-20" />
-      <footer className="w-full bg-gray-100 text-black py-8 mt-10">
+      <footer className="w-full bg-light-blue text-black py-8 mt-10">
         <div className="container mx-auto px-4">
           <div className="flex justify-center gap-16 mt-6 mb-10">
             <img
@@ -228,6 +228,23 @@ const Home = () => {
               <p className="text-lg font-medium">Stay Connected</p>
             </div>
           </div>
+          <hr className="border-blue-300 mt-6 mb-4" />
+          <p className="text-center text-sm text-black mb-2">
+            © 2024 Group 09 - BIT 03 - Final Project. All rights reserved.
+          </p>
+          <p className="text-center text-sm text-black">
+            <a href="/terms" className="hover:text-blue-700 transition-colors">
+              Terms and Conditions
+            </a>{" "}
+            |
+            <a
+              href="/privacy"
+              className="hover:text-blue-700 transition-colors"
+            >
+              {" "}
+              Privacy Policy
+            </a>
+          </p>
         </div>
       </footer>
     </>

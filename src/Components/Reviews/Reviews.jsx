@@ -29,7 +29,7 @@ const reviewsData = [
 
 const Reviews = () => {
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8 bg-light-blue min-h-screen">
       <h1 className="text-3xl font-semibold text-blue-700 mb-6">
         Customer Reviews
       </h1>

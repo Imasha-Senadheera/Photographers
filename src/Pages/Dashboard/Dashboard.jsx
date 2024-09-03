@@ -3,7 +3,7 @@ import AddPhotos from "../../Components/AddPhotos/AddPhotos";
 import OverView from "../../Components/OverView/OverView";
 import MyDetails from "../../Components/MyDetails/MyDetails";
 import Reviews from "../../Components/Reviews/Reviews";
-// import BudgetCalculator from "../../Components/BudgetCalculator/BudgetCalculator"; // Import this when ready
+import BudgetCal from "../../Components/BudgetCal/BudgetCal"; // Import BudgetCal
 import Logo from "../../Assests/logo.png";
 
 const Dashboard = () => {
@@ -14,9 +14,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-[#28396f] h-screen text-white">
+      <div className="fixed top-0 left-0 w-64 h-screen bg-[#28396f] text-white overflow-y-auto">
         <div className="py-5 px-9">
           <img src={Logo} alt="Logo" className="mb-9" />
         </div>
@@ -65,12 +65,13 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-grow h-screen p-10">
+      <div className="flex-grow ml-64 mt-16 p-10">
         {activeButton === "Overview" && <OverView />}
         {activeButton === "Add Photos" && <AddPhotos />}
         {activeButton === "My Profile" && <MyDetails />}
         {activeButton === "Reviews" && <Reviews />}
-        {/* {activeButton === "Budget Calculator" && <BudgetCalculator />} */}
+        {activeButton === "Budget Calculator" && <BudgetCal />}{" "}
+        {/* Add this line */}
       </div>
     </div>
   );
