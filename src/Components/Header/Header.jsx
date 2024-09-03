@@ -4,9 +4,9 @@ import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ isMainPage }) => {
   const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("isLogged") || false
+    JSON.parse(localStorage.getItem("isLogged")) || false
   );
   const navigate = useNavigate();
 
@@ -25,7 +25,13 @@ const Header = () => {
   return (
     <div className="flex bg-black text-white py-6 px-6 items-center font-bold">
       <div className="flex-grow flex justify-center">
-        {!isLogged ? (
+        {isMainPage ? (
+          <div className="flex gap-12">
+            <div className="cursor-pointer">Home</div>
+            <div className="cursor-pointer">About Us</div>
+            <div className="cursor-pointer">FAQs</div>
+          </div>
+        ) : !isLogged ? (
           <div className="flex gap-12">
             <div className="cursor-pointer">Home</div>
             <div className="cursor-pointer">About Us</div>
@@ -36,7 +42,7 @@ const Header = () => {
         )}
       </div>
       <div className="flex items-center gap-6">
-        {isLogged && (
+        {isLogged && !isMainPage && (
           <div className="flex gap-6 items-center mr-4">
             <MdSearch />
             <IoNotifications />
