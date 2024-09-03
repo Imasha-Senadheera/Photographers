@@ -35,6 +35,14 @@ function SignUpForm() {
           <input type="email" placeholder="Enter Email" />
           <input type="text" placeholder="Create Username" />
           <input type="tel" placeholder="Contact number" />
+          <select className="user-type-select">
+            <option value="" disabled selected>
+              Select User Type
+            </option>
+            <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
+            <option value="photographer">Photographer</option>
+          </select>
           <input type="password" placeholder="Password" />
           <input type="password" placeholder="Confirm Password" />
           <button type="submit">Register</button>
