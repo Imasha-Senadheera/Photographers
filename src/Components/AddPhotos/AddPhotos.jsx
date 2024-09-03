@@ -4,6 +4,7 @@ import { FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { cardsData } from "../../Constants/MockData";
 import ImageCard from "../ImageCard/ImageCard";
 import { IoIosAddCircle } from "react-icons/io";
+// import Footer from '../Footer/Footer'; 
 
 const AddPhotos = () => {
   return (
@@ -185,7 +186,9 @@ const AddPhotos = () => {
               Save
             </button>
           </div>
+          
         </form>
+
       </div>
 
       {/* Add Photos Section */}
@@ -220,7 +223,10 @@ const AddPhotos = () => {
           </div>
         </div>
       </div>
+      
+      
     </div>
+    
   );
 };
 
