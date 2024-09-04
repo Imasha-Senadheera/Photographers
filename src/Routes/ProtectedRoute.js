@@ -3,17 +3,13 @@ import { Navigate } from "react-router-dom";
 import { auth } from "../firebaseConfig"; // Adjust the import based on your project structure
 import { onAuthStateChanged } from "firebase/auth";
 
-const ProtectedRoute = ({ element, ...rest }) => {
+const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
+      setIsAuthenticated(!!user);
       setLoading(false);
     });
 
@@ -21,10 +17,10 @@ const ProtectedRoute = ({ element, ...rest }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // You can add a loading spinner here
+    return <div>Loading...</div>; // Consider adding a spinner or loading animation
   }
 
-  return isAuthenticated ? element : <Navigate to="/signin" />;
+  return isAuthenticated ? children : <Navigate to="/signin" />;
 };
 
 export default ProtectedRoute;

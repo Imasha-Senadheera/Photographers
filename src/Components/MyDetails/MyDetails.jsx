@@ -69,17 +69,10 @@ const MyDetails = () => {
                 <label className="text-lg font-semibold">Full Name:</label>
                 <input
                   type="text"
-                  name="firstName"
-                  value={formData.firstName || ""}
+                  name="username"
+                  value={formData.username || ""}
                   onChange={handleChange}
                   className="border border-gray-300 p-2 rounded w-full"
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName || ""}
-                  onChange={handleChange}
-                  className="border border-gray-300 p-2 rounded w-full mt-2"
                 />
               </div>
               <div className="mb-4">
@@ -93,21 +86,21 @@ const MyDetails = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="text-lg font-semibold">Organization:</label>
+                <label className="text-lg font-semibold">Phone Number:</label>
                 <input
                   type="text"
-                  name="organizationName"
-                  value={formData.organizationName || ""}
+                  name="phone"
+                  value={formData.phone || ""}
                   onChange={handleChange}
                   className="border border-gray-300 p-2 rounded w-full"
                 />
               </div>
               <div className="mb-4">
-                <label className="text-lg font-semibold">Contact Number:</label>
+                <label className="text-lg font-semibold">Organization:</label>
                 <input
                   type="text"
-                  name="contactNumber"
-                  value={formData.contactNumber || ""}
+                  name="organizationName"
+                  value={formData.organizationName || ""}
                   onChange={handleChange}
                   className="border border-gray-300 p-2 rounded w-full"
                 />
@@ -160,19 +153,19 @@ const MyDetails = () => {
             <div>
               <div className="mb-4">
                 <p className="text-lg font-semibold">Full Name:</p>
-                <p className="text-gray-700">{`${userData.firstName} ${userData.lastName}`}</p>
+                <p className="text-gray-700">{userData.username}</p>
               </div>
               <div className="mb-4">
                 <p className="text-lg font-semibold">Email:</p>
                 <p className="text-gray-700">{userData.email}</p>
               </div>
               <div className="mb-4">
-                <p className="text-lg font-semibold">Organization:</p>
-                <p className="text-gray-700">{userData.organizationName}</p>
+                <p className="text-lg font-semibold">Phone Number:</p>
+                <p className="text-gray-700">{userData.phone}</p>
               </div>
               <div className="mb-4">
-                <p className="text-lg font-semibold">Contact Number:</p>
-                <p className="text-gray-700">{userData.contactNumber}</p>
+                <p className="text-lg font-semibold">Organization:</p>
+                <p className="text-gray-700">{userData.organizationName}</p>
               </div>
               <div className="mb-4">
                 <p className="text-lg font-semibold">Experience:</p>

@@ -5,7 +5,7 @@ import SignInForm from "../Pages/SignInForm/SignInForm";
 import SignUpForm from "../Pages/SignUpForm/SignUpForm";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import CustomerDashboard from "../Pages/Dashboard/CustomerDashboard";
-import ProtectedRoute from "./ProtectedRoute"; // Adjust the import based on your project structure
+import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
   return (
@@ -15,11 +15,19 @@ const Router = () => {
       <Route path="/signup" element={<SignUpForm />} />
       <Route
         path="/dashboard"
-        element={<ProtectedRoute element={<Dashboard />} />}
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/customer-dashboard"
-        element={<ProtectedRoute element={<CustomerDashboard />} />}
+        element={
+          <ProtectedRoute>
+            <CustomerDashboard />
+          </ProtectedRoute>
+        }
       />
     </Routes>
   );
