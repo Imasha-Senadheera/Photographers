@@ -4,6 +4,13 @@ import "./PhotographerList.css";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
+const priceRanges = [
+  { label: "Rs 5000 - Rs 10000", min: 5000, max: 10000 },
+  { label: "Rs 10000 - Rs 20000", min: 10000, max: 20000 },
+  { label: "Rs 20000 - Rs 50000", min: 20000, max: 50000 },
+  { label: "Rs 50000 - Rs 100000", min: 50000, max: 100000 },
+];
+
 const PhotographerList = ({ searchParams }) => {
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,27 +36,32 @@ const PhotographerList = ({ searchParams }) => {
     fetchPackages();
   }, []);
 
+  const isWithinPriceRange = (price) => {
+    const { priceRange } = searchParams;
+    if (!priceRange) return true;
+
+    const range = priceRanges.find((r) => r.label === priceRange);
+    return range ? price >= range.min && price <= range.max : true;
+  };
+
   const filteredPackages = packages.filter((packageItem) => {
-    const matchesKeyword = searchParams.keyword
-      ? packageItem.packageName
-          .toLowerCase()
-          .includes(searchParams.keyword.toLowerCase())
+    const { keyword, location } = searchParams;
+    const matchesKeyword = keyword
+      ? packageItem.packageName.toLowerCase().includes(keyword.toLowerCase())
       : true;
-    const matchesLocation = searchParams.location
-      ? packageItem.location === searchParams.location
-      : true;
-    const matchesPriceRange = searchParams.priceRange
-      ? packageItem.price >=
-          parseInt(searchParams.priceRange.split(" ")[1].replace(/,/g, "")) &&
-        packageItem.price <=
-          parseInt(searchParams.priceRange.split(" ")[3].replace(/,/g, ""))
-      : true;
+    const matchesLocation = location ? packageItem.location === location : true;
+    const matchesPriceRange = isWithinPriceRange(packageItem.price);
 
     return matchesKeyword && matchesLocation && matchesPriceRange;
   });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading packages...</p>
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   if (error) {
