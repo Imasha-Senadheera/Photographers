@@ -10,7 +10,7 @@ const PhotographerCard = ({ photographer }) => {
   const imageSrc = photographer.coverPhoto || defaultImage;
 
   const handleCardClick = () => {
-    navigate("/package-details", { state: { photographer } }); // Updated route path
+    navigate("/package-details", { state: { photographer } }); 
   };
 
   return (

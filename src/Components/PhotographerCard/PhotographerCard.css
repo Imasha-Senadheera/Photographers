@@ -3,7 +3,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: calc(25% - 20px); /* Adjust width for four items per row */
+  width: calc(25% - 20px); 
   margin: 10px;
   transition: transform 0.3s ease-in-out;
 }
@@ -44,18 +44,18 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .photographer-card {
-    width: calc(33.33% - 20px); /* 3 cards per row for medium screens */
+    width: calc(33.33% - 20px); 
   }
 }
 
 @media (max-width: 768px) {
   .photographer-card {
-    width: calc(50% - 20px); /* 2 cards per row for smaller screens */
+    width: calc(50% - 20px); 
   }
 }
 
 @media (max-width: 480px) {
   .photographer-card {
-    width: calc(100% - 20px); /* 1 card per row for very small screens */
+    width: calc(100% - 20px); 
   }
 }

@@ -24,7 +24,6 @@ const CustomerDashboard = () => {
           >
             Overview
           </button>
-          {/* Add more buttons as needed */}
         </div>
       </div>
 

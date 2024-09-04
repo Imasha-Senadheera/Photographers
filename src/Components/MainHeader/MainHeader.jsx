@@ -3,17 +3,30 @@ import "./MainHeader.css";
 
 const districts = [
   "Colombo",
-  "Galle",
+  "Gampaha",
+  "Kalutara",
   "Kandy",
-  "Jaffna",
-  "Anuradhapura",
-  "Batticaloa",
-  "Matara",
-  "Kurunegala",
+  "Matale",
   "Nuwara Eliya",
+  "Galle",
+  "Matara",
+  "Hambantota",
+  "Jaffna",
+  "Kilinochchi",
+  "Mannar",
   "Vavuniya",
+  "Mullaitivu",
+  "Batticaloa",
+  "Ampara",
   "Trincomalee",
-  // Add more districts as needed
+  "Kurunegala",
+  "Puttalam",
+  "Anuradhapura",
+  "Polonnaruwa",
+  "Badulla",
+  "Moneragala",
+  "Ratnapura",
+  "Kegalle",
 ];
 
 const priceRanges = [

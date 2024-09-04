@@ -37,10 +37,10 @@
 }
 
 .auth-button {
-  background-color: #1e40af; /* Blue color */
+  background-color: #1e40af; 
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 9999px; /* Full rounded button */
+  border-radius: 9999px; 
   border: none;
   cursor: pointer;
   font-weight: bold;

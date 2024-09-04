@@ -1,11 +1,11 @@
 .photographer-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Adjust spacing between items */
+  justify-content: space-between; 
   margin: 20px auto;
-  max-width: 1200px; /* Adjust as needed */
+  max-width: 1200px;
   padding: 10px;
-  gap: 20px; /* Adjust gap between items if needed */
+  gap: 20px; 
 }
 
 /* Loading Styles */
@@ -14,21 +14,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Adjust as needed */
+  height: 100vh; 
 }
 
 .loading-text {
   font-size: 1.25rem;
-  color: #1d4ed8; /* Adjust color to match your theme */
+  color: #1d4ed8; 
   margin-bottom: 1rem;
 }
 
 .loading-spinner {
-  border: 4px solid #f3f4f6; /* Light grey background */
-  border-top: 4px solid #1d4ed8; /* Blue spinner */
+  border: 4px solid #f3f4f6; 
+  border-top: 4px solid #1d4ed8; 
   border-radius: 50%;
-  width: 3rem; /* Adjust size */
-  height: 3rem; /* Adjust size */
+  width: 3rem; 
+  height: 3rem; 
   animation: spin 1s linear infinite;
 }
 

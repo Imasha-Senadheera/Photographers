@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom"; 
 import ImageCard from "../../Components/ImageCard/ImageCard";
 import Cover from "../../Assests/Cover.png";
 import Logo from "../../Assests/logo.png";

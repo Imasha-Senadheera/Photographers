@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
-    font-family: 'Raleway', sans-serif; /* Apply Raleway font */
+    font-family: 'Raleway', sans-serif; 
   }
   
   .header h1 {

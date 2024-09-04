@@ -17,7 +17,7 @@ const MyDetails = () => {
           const userSnapshot = await getDoc(userDoc);
           if (userSnapshot.exists()) {
             setUserData(userSnapshot.data());
-            setFormData(userSnapshot.data()); // Initialize formData with user data
+            setFormData(userSnapshot.data()); 
           }
         }
       } catch (error) {

@@ -46,7 +46,7 @@ const AddPhotos = () => {
   const [samplePhotos, setSamplePhotos] = useState([]);
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {

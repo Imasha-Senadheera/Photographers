@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig"; // Import auth from firebaseConfig
-import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
-import { db } from "../../firebaseConfig"; // Import Firestore instance
+import { auth } from "../../firebaseConfig"; 
+import { doc, setDoc } from "firebase/firestore"; 
+import { db } from "../../firebaseConfig"; 
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";

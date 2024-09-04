@@ -7,7 +7,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import CustomerDashboard from "../Pages/Dashboard/CustomerDashboard";
 import PhotographerListPage from "../Components/PhotographerList/PhotographerList"; 
 import ProtectedRoute from "./ProtectedRoute";
-import PackageDetails from "../Pages/PackageDetails/PackageDetails"; // Adjust the path as needed
+import PackageDetails from "../Pages/PackageDetails/PackageDetails"; 
 
 const Router = () => {
   return (

@@ -1,8 +1,8 @@
 /* Style for the logo */
 .logo-small {
   margin-top: 35px;
-  width: 150px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  width: 150px; 
+  height: auto; 
 }
 
 /* Sidebar */
@@ -34,9 +34,9 @@
 
 /* Main content */
 .main-content {
-  margin-left: 16rem; /* Match the width of the sidebar */
-  margin-top: 4rem; /* Adjust the top margin to account for the header */
+  margin-left: 16rem; 
+  margin-top: 4rem; 
   padding: 2.5rem;
   flex-grow: 1;
-  background-color: #f0f0f0; /* Light background for the content area */
+  background-color: #f0f0f0; 
 }

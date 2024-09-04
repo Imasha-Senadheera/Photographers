@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Remove useEffect
+import React, { useState } from "react"; 
 import Header from "../../Components/Header/Header";
 import MainHeader from "../../Components/MainHeader/MainHeader";
 import PhotographerList from "../../Components/PhotographerList/PhotographerList";
