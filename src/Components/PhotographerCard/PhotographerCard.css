@@ -3,13 +3,11 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: calc(25% - 20px); 
+  width: calc(
+    22% - 20px
+  ); /* Reduced width to fit 4 cards per row with spacing */
   margin: 10px;
   transition: transform 0.3s ease-in-out;
-}
-
-.photographer-card:hover {
-  transform: translateY(-5px);
 }
 
 .photographer-card img {
@@ -44,18 +42,18 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .photographer-card {
-    width: calc(33.33% - 20px); 
+    width: calc(30% - 20px); /* Adjust width for medium screens */
   }
 }
 
 @media (max-width: 768px) {
   .photographer-card {
-    width: calc(50% - 20px); 
+    width: calc(45% - 20px); /* Adjust width for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .photographer-card {
-    width: calc(100% - 20px); 
+    width: calc(100% - 20px); /* Full width for mobile screens */
   }
 }

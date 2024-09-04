@@ -1,50 +1,28 @@
 .photographer-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: space-between;
   margin: 20px auto;
   max-width: 1200px;
   padding: 10px;
-  gap: 20px; 
-}
-
-/* Loading Styles */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; 
-}
-
-.loading-text {
-  font-size: 1.25rem;
-  color: #1d4ed8; 
-  margin-bottom: 1rem;
-}
-
-.loading-spinner {
-  border: 4px solid #f3f4f6; 
-  border-top: 4px solid #1d4ed8; 
-  border-radius: 50%;
-  width: 3rem; 
-  height: 3rem; 
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  gap: 20px;
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .photographer-card {
+    width: calc(25% - 20px); /* 4 cards per row with spacing */
+  }
+}
+
 @media (max-width: 768px) {
-  .photographer-list {
-    flex-direction: column;
-    align-items: center;
+  .photographer-card {
+    width: calc(50% - 20px); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .photographer-card {
+    width: calc(100% - 20px); /* 1 card per row */
   }
 }
