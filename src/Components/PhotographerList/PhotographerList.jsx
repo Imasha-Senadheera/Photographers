@@ -4,7 +4,7 @@ import "./PhotographerList.css";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
-const PhotographerList = () => {
+const PhotographerList = ({ searchParams }) => {
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +29,25 @@ const PhotographerList = () => {
     fetchPackages();
   }, []);
 
+  const filteredPackages = packages.filter((packageItem) => {
+    const matchesKeyword = searchParams.keyword
+      ? packageItem.packageName
+          .toLowerCase()
+          .includes(searchParams.keyword.toLowerCase())
+      : true;
+    const matchesLocation = searchParams.location
+      ? packageItem.location === searchParams.location
+      : true;
+    const matchesPriceRange = searchParams.priceRange
+      ? packageItem.price >=
+          parseInt(searchParams.priceRange.split(" ")[1].replace(/,/g, "")) &&
+        packageItem.price <=
+          parseInt(searchParams.priceRange.split(" ")[3].replace(/,/g, ""))
+      : true;
+
+    return matchesKeyword && matchesLocation && matchesPriceRange;
+  });
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -39,10 +58,10 @@ const PhotographerList = () => {
 
   return (
     <div className="photographer-list">
-      {packages.length === 0 ? (
+      {filteredPackages.length === 0 ? (
         <p>No packages available.</p>
       ) : (
-        packages.map((packageItem) => (
+        filteredPackages.map((packageItem) => (
           <PhotographerCard key={packageItem.id} photographer={packageItem} />
         ))
       )}

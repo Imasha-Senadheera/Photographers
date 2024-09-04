@@ -17,10 +17,10 @@ const districts = [
 ];
 
 const priceRanges = [
-  "Rs 5,000 - Rs 10,000",
-  "Rs 10,000 - Rs 20,000",
-  "Rs 20,000 - Rs 50,000",
-  "Rs 50,000 - Rs 100,000",
+  "Rs 5000 - Rs 10000",
+  "Rs 10000 - Rs 20000",
+  "Rs 20000 - Rs 50000",
+  "Rs 50000 - Rs 100000",
 ];
 
 const MainHeader = ({ onSearch }) => {
