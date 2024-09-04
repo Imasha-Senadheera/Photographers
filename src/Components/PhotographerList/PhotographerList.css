@@ -1,3 +1,14 @@
+.photographer-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust spacing between items */
+  margin: 20px auto;
+  max-width: 1200px; /* Adjust as needed */
+  padding: 10px;
+  gap: 20px; /* Adjust gap between items if needed */
+}
+
+/* Loading Styles */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -28,16 +39,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.photographer-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 20px auto;
-  max-width: 1200px;
-  padding: 10px;
-  gap: 20px;
 }
 
 /* Responsive Design */

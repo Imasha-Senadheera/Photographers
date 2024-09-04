@@ -1,42 +1,61 @@
 .photographer-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px;
-    margin: 10px;
-    transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: calc(25% - 20px); /* Adjust width for four items per row */
+  margin: 10px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .photographer-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .photographer-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid #eee;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
 }
 
 .photographer-info {
-    padding: 15px;
-    text-align: center;
+  padding: 15px;
+  text-align: center;
 }
 
 .photographer-info h3 {
-    margin: 10px 0;
-    font-size: 1.5em;
-    color: #333;
+  margin: 10px 0;
+  font-size: 1.5em;
+  color: #333;
 }
 
 .photographer-info p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #777;
+  margin: 5px 0;
+  font-size: 1em;
+  color: #777;
 }
 
 .photographer-info p:first-of-type {
-    font-weight: bold;
-    color: #555;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .photographer-card {
+    width: calc(33.33% - 20px); /* 3 cards per row for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .photographer-card {
+    width: calc(50% - 20px); /* 2 cards per row for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .photographer-card {
+    width: calc(100% - 20px); /* 1 card per row for very small screens */
+  }
 }
