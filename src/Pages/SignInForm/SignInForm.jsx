@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, firestore as db } from "../../firebaseConfig";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "./SignInForm.css";
 import logoImage from "../../Assests/logo.png";
 
 function SignInForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,35 +22,24 @@ function SignInForm() {
       return;
     }
 
+    const auth = getAuth();
+
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      const user = userCredential.user;
 
-      // Fetch the user's role from Firestore
-      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
-      if (!userDoc.exists()) {
-        alert("User document does not exist.");
-        return;
-      }
-
-      const userData = userDoc.data();
-      console.log("User data:", userData);
-
-      const userRole = userData?.role;
-
-      if (userRole === "photographer") {
-        navigate("/dashboard");
-      } else if (userRole === "customer") {
-        navigate("/customer-dashboard");
-      } else {
-        alert("User role is undefined.");
-      }
+      // Handle successful sign-in
+      console.log("Signed in user:", user);
+      navigate("/dashboard"); // Adjust the path based on your app's routing
     } catch (error) {
-      console.error("Login error:", error.message);
-      alert("An error occurred during login. Please try again.");
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(`Error ${errorCode}: ${errorMessage}`);
+      console.error("Login error:", errorCode, errorMessage);
     }
   };
 
@@ -95,6 +83,7 @@ function SignInForm() {
             required
           />
           <button type="submit">Login</button>
+          {error && <p className="error-message">{error}</p>}
         </form>
       </div>
     </div>

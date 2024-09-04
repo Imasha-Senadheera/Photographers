@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../firebaseConfig"; // Import auth from firebaseConfig
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
@@ -17,6 +17,7 @@ function SignUpForm() {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,20 +29,24 @@ function SignUpForm() {
     if (formData.password !== formData.confirmPassword) {
       return alert("Passwords do not match!");
     }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      console.log("User created:", userCredential.user);
+      const user = userCredential.user;
+      console.log("User created:", user);
 
       // Optionally, save additional user info (username, phone, userType) to Firebase Firestore or Realtime Database
 
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {
-      console.error("Error:", error);
-      alert(error.message || "Registration failed");
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(`Error ${errorCode}: ${errorMessage}`);
+      console.error("Registration error:", errorCode, errorMessage);
     }
   };
 
@@ -112,6 +117,7 @@ function SignUpForm() {
             onChange={handleChange}
           />
           <button type="submit">Sign Up</button>
+          {error && <p className="error-message">{error}</p>}
         </form>
         <div className="social-signup">
           <p>or continue with</p>

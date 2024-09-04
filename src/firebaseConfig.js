@@ -1,7 +1,9 @@
+// firebaseConfig.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth"; // Import authentication
+import { getAnalytics } from "firebase/analytics";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDfCb3WJ5_HGrt15fSsMob8PNqnICo1NX4",
   authDomain: "photographer-project-8ccc5.firebaseapp.com",
@@ -12,6 +14,13 @@ const firebaseConfig = {
   measurementId: "G-R80KFWF4TT",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+
+// Initialize Firebase Auth
+const auth = getAuth(app);
+
+// Initialize Firebase Analytics
+const analytics = getAnalytics(app);
+
+export { auth, analytics };
