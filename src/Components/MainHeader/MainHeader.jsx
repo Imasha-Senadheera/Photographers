@@ -46,14 +46,14 @@ const MainHeader = ({ onSearch }) => {
   };
 
   return (
-    <header className="header">
+    <header className="mheader">
       <h1>CELEBRATE YOUR STORY THROUGH PHOTOGRAPHY</h1>
       <p>
-        It's simple and it's free. Connect with hand-picked, local photographers
-        around Sri Lanka for fun, hassle-free photo shoots. So what are you
+        It's simple and it's free. Connect with local photographers
+        around Sri Lanka. So what are you
         waiting for? Let's find a photographer!
       </p>
-      <div className="search-bar">
+      <div className="msearch-bar">
         <input
           type="text"
           placeholder="Type a keyword..."
