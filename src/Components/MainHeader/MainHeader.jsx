@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MainHeader.css";
 
 const districts = [
@@ -16,7 +16,22 @@ const districts = [
   // Add more districts as needed
 ];
 
-const MainHeader = () => {
+const priceRanges = [
+  "Rs 5,000 - Rs 10,000",
+  "Rs 10,000 - Rs 20,000",
+  "Rs 20,000 - Rs 50,000",
+  "Rs 50,000 - Rs 100,000",
+];
+
+const MainHeader = ({ onSearch }) => {
+  const [keyword, setKeyword] = useState("");
+  const [location, setLocation] = useState("");
+  const [priceRange, setPriceRange] = useState("");
+
+  const handleSearch = () => {
+    onSearch({ keyword, location, priceRange });
+  };
+
   return (
     <header className="header">
       <h1>CELEBRATE YOUR STORY THROUGH PHOTOGRAPHY</h1>
@@ -26,8 +41,13 @@ const MainHeader = () => {
         waiting for? Let's find a photographer!
       </p>
       <div className="search-bar">
-        <input type="text" placeholder="Type a keyword..." />
-        <select>
+        <input
+          type="text"
+          placeholder="Type a keyword..."
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <select value={location} onChange={(e) => setLocation(e.target.value)}>
           <option value="">Location</option>
           {districts.map((district, index) => (
             <option key={index} value={district}>
@@ -35,15 +55,18 @@ const MainHeader = () => {
             </option>
           ))}
         </select>
-        <select>
+        <select
+          value={priceRange}
+          onChange={(e) => setPriceRange(e.target.value)}
+        >
           <option value="">Price range</option>
-          {/* Add Sri Lankan Rupee price ranges here */}
-          <option value="Rs 5,000 - Rs 10,000">Rs 5,000 - Rs 10,000</option>
-          <option value="Rs 10,000 - Rs 20,000">Rs 10,000 - Rs 20,000</option>
-          <option value="Rs 20,000 - Rs 50,000">Rs 20,000 - Rs 50,000</option>
-          <option value="Rs 50,000 - Rs 100,000">Rs 50,000 - Rs 100,000</option>
+          {priceRanges.map((range, index) => (
+            <option key={index} value={range}>
+              {range}
+            </option>
+          ))}
         </select>
-        <button>Search</button>
+        <button onClick={handleSearch}>Search</button>
       </div>
     </header>
   );

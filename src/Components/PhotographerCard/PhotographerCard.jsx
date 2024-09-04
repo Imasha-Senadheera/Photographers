@@ -1,19 +1,19 @@
 import React from "react";
 import "./PhotographerCard.css";
-import defaultImage from "../../Assests/10.png"; 
+import defaultImage from "../../Assests/10.png";
 
 const PhotographerCard = ({ photographer }) => {
-  // Use defaultImage if photographer.image is not available
-  const imageSrc = photographer.image || defaultImage;
+  // Use defaultImage if coverPhoto is not available
+  const imageSrc = photographer.coverPhoto || defaultImage;
 
   return (
     <div className="photographer-card">
-      <img src={imageSrc} alt={photographer.name} />
+      <img src={imageSrc} alt={photographer.packageName} />
       <div className="photographer-info">
-        <h3>{photographer.name}</h3>
-        <p>{photographer.category}</p>
-        <p>Price range: {photographer.priceRange}</p>
-        <p>Rating: {photographer.rating} / 5</p>
+        <h3>{photographer.packageName}</h3>
+        <p>Price: Rs. {photographer.price}</p>
+        <p>Duration: {photographer.duration}</p>
+        <p>Location: {photographer.location}</p>
       </div>
     </div>
   );

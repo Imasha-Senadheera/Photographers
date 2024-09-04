@@ -15,13 +15,8 @@ const Header = ({ isMainPage }) => {
     // Set up Firebase Auth listener
     console.log("Setting up Firebase Auth listener...");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        console.log("User logged in:", currentUser);
-        setUser(currentUser);
-      } else {
-        console.log("No user logged in");
-        setUser(null);
-      }
+      console.log("Auth state changed:", currentUser);
+      setUser(currentUser);
     });
 
     return () => {
@@ -56,21 +51,13 @@ const Header = ({ isMainPage }) => {
     <div className="header-container">
       <div className="header-content">
         <div className="nav-links">
-          {isMainPage ? (
-            <div className="links">
-              <div className="cursor-pointer">Home</div>
-              <div className="cursor-pointer">About Us</div>
-              <div className="cursor-pointer">FAQs</div>
+          <div className="links">
+            <div className="cursor-pointer" onClick={() => navigate("/")}>
+              Home
             </div>
-          ) : !user ? (
-            <div className="links">
-              <div className="cursor-pointer">Home</div>
-              <div className="cursor-pointer">About Us</div>
-              <div className="cursor-pointer">FAQs</div>
-            </div>
-          ) : (
-            <div>Dashboard</div>
-          )}
+            <div className="cursor-pointer">About Us</div>
+            <div className="cursor-pointer">FAQs</div>
+          </div>
         </div>
         <div className="header-actions">
           {user && !isMainPage && (
