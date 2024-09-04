@@ -5,8 +5,9 @@ import SignInForm from "../Pages/SignInForm/SignInForm";
 import SignUpForm from "../Pages/SignUpForm/SignUpForm";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import CustomerDashboard from "../Pages/Dashboard/CustomerDashboard";
-import PhotographerListPage from "../Components/PhotographerList/PhotographerList"; // Ensure this path is correct
+import PhotographerListPage from "../Components/PhotographerList/PhotographerList"; 
 import ProtectedRoute from "./ProtectedRoute";
+import PackageDetails from "../Pages/PackageDetails/PackageDetails"; // Adjust the path as needed
 
 const Router = () => {
   return (
@@ -31,8 +32,10 @@ const Router = () => {
         }
       />
       <Route path="/photographers" element={<PhotographerListPage />} />
+      <Route path="/package-details" element={<PackageDetails />} /> 
     </Routes>
   );
 };
+
 
 export default Router;

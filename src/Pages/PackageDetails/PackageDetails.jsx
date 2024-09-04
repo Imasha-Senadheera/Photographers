@@ -8,9 +8,9 @@ import Logo from "../../Assests/logo.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
-import "./Home.css";
+import "./PackageDetails.css";
 
-const Home = () => {
+const PackageDetails = () => {
   const location = useLocation(); // Use useLocation to get the state
   const photographer = location.state?.photographer; // Get photographer details from state
 
@@ -243,4 +243,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default PackageDetails;
