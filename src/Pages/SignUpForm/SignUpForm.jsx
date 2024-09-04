@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
@@ -8,10 +10,10 @@ import googleImage from "../../Assests/google.png";
 function SignUpForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
     username: "",
+    email: "",
     phone: "",
-    userType: "",
+    userType: "customer", // Default value
     password: "",
     confirmPassword: "",
   });
@@ -27,20 +29,19 @@ function SignUpForm() {
       return alert("Passwords do not match!");
     }
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      console.log("User created:", userCredential.user);
 
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/signin"); // Redirect after successful registration
-      } else {
-        alert(data.message || "Registration failed");
-      }
+      // Optionally, save additional user info (username, phone, userType) to Firebase Firestore or Realtime Database
+
+      navigate("/signin"); // Redirect after successful registration
     } catch (error) {
       console.error("Error:", error);
+      alert(error.message || "Registration failed");
     }
   };
 
@@ -52,14 +53,13 @@ function SignUpForm() {
           <h1>Sign up to</h1>
           <h2>Graphers</h2>
           <p>
-            If you already have an account
+            Already have an account?
             <br />
-            You can{" "}
             <button
-              className="login-button"
+              className="signin-button"
               onClick={() => navigate("/signin")}
             >
-              Login here!
+              Sign In here!
             </button>
           </p>
         </div>
@@ -68,38 +68,34 @@ function SignUpForm() {
         <h1>Sign Up</h1>
         <form className="signup-form" onSubmit={handleSubmit}>
           <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+          />
+          <input
             type="email"
             name="email"
-            placeholder="Enter Email"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="username"
-            placeholder="Create Username"
-            value={formData.username}
-            onChange={handleChange}
-          />
-          <input
-            type="tel"
             name="phone"
-            placeholder="Contact number"
+            placeholder="Phone Number"
             value={formData.phone}
             onChange={handleChange}
           />
           <select
-            className="user-type-select"
             name="userType"
             value={formData.userType}
             onChange={handleChange}
           >
-            <option value="" disabled>
-              Select User Type
-            </option>
             <option value="customer">Customer</option>
-            <option value="admin">Admin</option>
             <option value="photographer">Photographer</option>
+            <option value="admin">Admin</option>
           </select>
           <input
             type="password"
@@ -117,7 +113,7 @@ function SignUpForm() {
           />
           <button type="submit">Sign Up</button>
         </form>
-        <div className="social-login">
+        <div className="social-signup">
           <p>or continue with</p>
           <div className="social-icons">
             <img src={facebookImage} alt="Facebook" />

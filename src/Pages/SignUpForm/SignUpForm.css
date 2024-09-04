@@ -56,7 +56,7 @@ body {
   line-height: 1.5;
 }
 
-.login-button {
+.signin-button {
   background: none;
   border: none;
   font-weight: bold;
@@ -67,7 +67,7 @@ body {
   text-decoration: underline;
 }
 
-.login-button:hover {
+.signin-button:hover {
   text-decoration: none;
 }
 
@@ -94,7 +94,8 @@ body {
   align-items: center;
 }
 
-.signup-form input {
+.signup-form input,
+.signup-form select {
   width: 100%;
   padding: 15px;
   font-size: 1rem;
@@ -106,8 +107,8 @@ body {
   color: #333333;
 }
 
-.signup-form input:last-of-type {
-  margin-bottom: 50px;
+.signup-form select {
+  cursor: pointer;
 }
 
 .signup-form button {
@@ -126,30 +127,12 @@ body {
   background-color: #0a3d8e;
 }
 
-/* User type select dropdown styling */
-.user-type-select {
-  width: 100%;
-  padding: 15px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  margin-bottom: 20px;
-  font-family: "Raleway", sans-serif;
-  background-color: #ffffff;
-  color: #333333; 
-}
-
-.user-type-select:focus {
-  outline: none;
-  border: 2px solid #1844bc;
-}
-
-/* Social login styling */
-.social-login {
+/* Social signup styling */
+.social-signup {
   text-align: center;
 }
 
-.social-login p {
+.social-signup p {
   margin: 35px 0;
 }
 
@@ -185,20 +168,6 @@ body {
     transform: translateX(-50%);
   }
 
-  .text-content {
-    top: unset;
-    left: unset;
-    transform: none;
-  }
-
-  .text-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .text-content h2 {
-    font-size: 2rem;
-  }
-
   .right-section {
     width: 100%;
     padding: 20px;
@@ -209,7 +178,8 @@ body {
     max-width: 300px;
   }
 
-  .signup-form input {
+  .signup-form input,
+  .signup-form select {
     padding: 10px;
   }
 
@@ -241,7 +211,8 @@ body {
     font-size: 1.5rem;
   }
 
-  .signup-form input {
+  .signup-form input,
+  .signup-form select {
     font-size: 0.9rem;
     padding: 8px;
   }
@@ -251,7 +222,7 @@ body {
     padding: 8px;
   }
 
-  .social-login p {
+  .social-signup p {
     margin: 20px 0;
   }
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, firestore as db } from "../../firebaseConfig";
 import "./SignInForm.css";
 import logoImage from "../../Assests/logo.png";
-import facebookImage from "../../Assests/facebook.png";
-import googleImage from "../../Assests/google.png";
 
 function SignInForm() {
   const navigate = useNavigate();
@@ -23,30 +24,33 @@ function SignInForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message || "Login failed");
+      // Fetch the user's role from Firestore
+      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      if (!userDoc.exists()) {
+        alert("User document does not exist.");
         return;
       }
 
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
+      const userData = userDoc.data();
+      console.log("User data:", userData);
 
-      if (data.userType === "photographer") {
-        navigate("/photographer-dashboard");
-      } else if (data.userType === "customer") {
+      const userRole = userData?.role;
+
+      if (userRole === "photographer") {
+        navigate("/dashboard");
+      } else if (userRole === "customer") {
         navigate("/customer-dashboard");
       } else {
-        navigate("/dashboard");
+        alert("User role is undefined.");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Login error:", error.message);
       alert("An error occurred during login. Please try again.");
     }
   };
@@ -75,11 +79,12 @@ function SignInForm() {
         <h1>Sign In</h1>
         <form className="signin-form" onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="email"
             name="email"
-            placeholder="Email or Username"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
           <input
             type="password"
@@ -87,16 +92,10 @@ function SignInForm() {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
+            required
           />
           <button type="submit">Login</button>
         </form>
-        <div className="social-login">
-          <p>or continue with</p>
-          <div className="social-icons">
-            <img src={facebookImage} alt="Facebook" />
-            <img src={googleImage} alt="Google" />
-          </div>
-        </div>
       </div>
     </div>
   );

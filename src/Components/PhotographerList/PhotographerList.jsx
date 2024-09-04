@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PhotographerCard from "../PhotographerCard/PhotographerCard";
 import "./PhotographerList.css";
 import defaultImage from "../../Assests/10.png";
 
-// Sample default photographer data
+// Sample default photographer data with Sri Lankan prices and locations
 const defaultPhotographers = [
   {
     id: 1,
     name: "John Doe",
     image: defaultImage,
     category: "Wedding",
-    priceRange: "$100 - $500",
+    priceRange: "Rs 20,000 - Rs 50,000",
+    location: "Colombo",
     rating: 4.5,
   },
   {
@@ -18,7 +19,8 @@ const defaultPhotographers = [
     name: "Jane Smith",
     image: defaultImage,
     category: "Portrait",
-    priceRange: "$200 - $700",
+    priceRange: "Rs 10,000 - Rs 20,000",
+    location: "Kandy",
     rating: 4.8,
   },
   {
@@ -26,7 +28,8 @@ const defaultPhotographers = [
     name: "Alex Johnson",
     image: defaultImage,
     category: "Event",
-    priceRange: "$150 - $600",
+    priceRange: "Rs 15,000 - Rs 30,000",
+    location: "Galle",
     rating: 4.2,
   },
 ];
@@ -35,27 +38,6 @@ const PhotographerList = () => {
   const [photographers, setPhotographers] = useState(defaultPhotographers);
   const [loading, setLoading] = useState(false); // Set to false to avoid loading state
   const [error, setError] = useState(null);
-
-  // Comment out or remove the fetch logic
-  // useEffect(() => {
-  //   // Fetch data from your API
-  //   fetch("/api/photographers")
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setPhotographers(data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //       setError(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   if (loading) {
     return <p>Loading...</p>;
