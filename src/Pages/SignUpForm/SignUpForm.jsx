@@ -26,8 +26,10 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
-      return alert("Passwords do not match!");
+      setError("Passwords do not match!");
+      return;
     }
 
     try {
@@ -78,6 +80,7 @@ function SignUpForm() {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
+            required
           />
           <input
             type="email"
@@ -85,6 +88,7 @@ function SignUpForm() {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
           <input
             type="text"
@@ -108,6 +112,7 @@ function SignUpForm() {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
+            required
           />
           <input
             type="password"
@@ -115,6 +120,7 @@ function SignUpForm() {
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
+            required
           />
           <button type="submit">Sign Up</button>
           {error && <p className="error-message">{error}</p>}

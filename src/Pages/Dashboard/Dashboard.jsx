@@ -1,61 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import Header from "../../Components/Header/Header";
 import AddPhotos from "../../Components/AddPhotos/AddPhotos";
 import OverView from "../../Components/OverView/OverView";
 import MyDetails from "../../Components/MyDetails/MyDetails";
 import Reviews from "../../Components/Reviews/Reviews";
-import BudgetCal from "../../Components/BudgetCal/BudgetCal"; // Import BudgetCal
+import BudgetCal from "../../Components/BudgetCal/BudgetCal";
 import Logo from "../../Assests/logo.png";
+import "./Dashboard.css"; // Import the CSS file
 
 const Dashboard = () => {
   const [activeButton, setActiveButton] = useState("Overview");
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Set up Firebase Auth listener
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        navigate("/signin");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
   };
 
+  if (!user) return <div>Loading...</div>; // Show loading indicator while checking authentication
+
   return (
     <div className="flex min-h-screen">
+      <Header isMainPage={false} /> {/* Include the Header */}
       {/* Sidebar */}
-      <div className="fixed top-0 left-0 w-64 h-screen bg-[#28396f] text-white overflow-y-auto">
+      <div className="sidebar fixed top-0 left-0 w-64 h-screen">
         <div className="py-5 px-9">
-          <img src={Logo} alt="Logo" className="mb-9" />
+          <img
+            src={Logo}
+            alt="Logo"
+            className="logo-small mb-9" // Use the class for styling the logo
+          />
         </div>
         <div className="space-y-2">
           <button
-            className={`flex text-left w-full px-5 py-2 ${
-              activeButton === "Overview" ? "bg-[#314375]" : ""
+            className={`sidebar-button ${
+              activeButton === "Overview" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("Overview")}
           >
             Overview
           </button>
           <button
-            className={`flex text-left w-full px-5 py-2 ${
-              activeButton === "My Profile" ? "bg-[#314375]" : ""
+            className={`sidebar-button ${
+              activeButton === "My Profile" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("My Profile")}
           >
             My Profile
           </button>
           <button
-            className={`flex text-left w-full px-5 py-2 ${
-              activeButton === "Add Photos" ? "bg-[#314375]" : ""
+            className={`sidebar-button ${
+              activeButton === "Add Photos" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("Add Photos")}
           >
             Add Photos
           </button>
           <button
-            className={`flex text-left w-full px-5 py-2 ${
-              activeButton === "Reviews" ? "bg-[#314375]" : ""
+            className={`sidebar-button ${
+              activeButton === "Reviews" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("Reviews")}
           >
             Reviews
           </button>
           <button
-            className={`flex text-left w-full px-5 py-2 ${
-              activeButton === "Budget Calculator" ? "bg-[#314375]" : ""
+            className={`sidebar-button ${
+              activeButton === "Budget Calculator" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("Budget Calculator")}
           >
@@ -63,15 +90,13 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-
       {/* Main Content */}
-      <div className="flex-grow ml-64 mt-16 p-10">
+      <div className="main-content">
         {activeButton === "Overview" && <OverView />}
         {activeButton === "Add Photos" && <AddPhotos />}
         {activeButton === "My Profile" && <MyDetails />}
         {activeButton === "Reviews" && <Reviews />}
-        {activeButton === "Budget Calculator" && <BudgetCal />}{" "}
-        {/* Add this line */}
+        {activeButton === "Budget Calculator" && <BudgetCal />}
       </div>
     </div>
   );

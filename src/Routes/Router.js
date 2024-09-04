@@ -5,6 +5,7 @@ import SignInForm from "../Pages/SignInForm/SignInForm";
 import SignUpForm from "../Pages/SignUpForm/SignUpForm";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import CustomerDashboard from "../Pages/Dashboard/CustomerDashboard";
+import ProtectedRoute from "./ProtectedRoute"; // Adjust the import based on your project structure
 
 const Router = () => {
   return (
@@ -12,8 +13,14 @@ const Router = () => {
       <Route path="/" element={<MainPage />} />
       <Route path="/signin" element={<SignInForm />} />
       <Route path="/signup" element={<SignUpForm />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+      <Route
+        path="/dashboard"
+        element={<ProtectedRoute element={<Dashboard />} />}
+      />
+      <Route
+        path="/customer-dashboard"
+        element={<ProtectedRoute element={<CustomerDashboard />} />}
+      />
     </Routes>
   );
 };

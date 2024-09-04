@@ -18,27 +18,42 @@ function SignInForm() {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      alert("Please fill in all fields.");
+      setError("Please fill in all fields.");
       return;
     }
 
     const auth = getAuth();
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      const user = userCredential.user;
-
-      // Handle successful sign-in
-      console.log("Signed in user:", user);
       navigate("/dashboard"); // Adjust the path based on your app's routing
+      console.log("USER AWA");
+      localStorage.setItem("useremail",user.user.email)
+      console.log(user.user.email);
+      console.log(localStorage.getItem("user").email)
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      setError(`Error ${errorCode}: ${errorMessage}`);
+
+      switch (errorCode) {
+        case "auth/invalid-email":
+          setError("Invalid email address.");
+          break;
+        case "auth/user-not-found":
+          setError("User not found.");
+          break;
+        case "auth/wrong-password":
+          setError("Incorrect password.");
+          break;
+        default:
+          setError(`Error: ${errorMessage}`);
+          break;
+      }
+
       console.error("Login error:", errorCode, errorMessage);
     }
   };

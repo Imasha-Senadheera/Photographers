@@ -1,60 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebaseConfig";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import "./Header.css"; // Make sure to import your CSS file
 
 const Header = ({ isMainPage }) => {
-  const [isLogged, setIsLogged] = useState(
-    JSON.parse(localStorage.getItem("isLogged")) || false
-  );
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Set up Firebase Auth listener
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const loginLogoutHandler = () => {
-    if (!isLogged) {
-      // Navigate to the sign-in page if not logged in
-      navigate("/signin");
+    if (user) {
+      signOut(auth)
+        .then(() => {
+          navigate("/signin");
+        })
+        .catch((error) => {
+          console.error("Error signing out: ", error);
+        });
     } else {
-      localStorage.removeItem("isLogged");
-      setIsLogged(false);
-      navigate("/");
+      navigate("/signin");
     }
   };
 
   return (
-    <div className="flex bg-black text-white py-6 px-6 items-center font-bold">
-      <div className="flex-grow flex justify-center">
-        {isMainPage ? (
-          <div className="flex gap-12">
-            <div className="cursor-pointer">Home</div>
-            <div className="cursor-pointer">About Us</div>
-            <div className="cursor-pointer">FAQs</div>
-          </div>
-        ) : !isLogged ? (
-          <div className="flex gap-12">
-            <div className="cursor-pointer">Home</div>
-            <div className="cursor-pointer">About Us</div>
-            <div className="cursor-pointer">FAQs</div>
-          </div>
-        ) : (
-          <div>Dashboard</div>
-        )}
-      </div>
-      <div className="flex items-center gap-6">
-        {isLogged && !isMainPage && (
-          <div className="flex gap-6 items-center mr-4">
-            <MdSearch />
-            <IoNotifications />
-            <div>Pasindu Maneesha</div>
-            <FaUserCircle className="text-3xl" />
-          </div>
-        )}
-        <button
-          onClick={loginLogoutHandler}
-          className="bg-blue-700 text-white px-4 py-2 rounded-full"
-        >
-          {isLogged ? "Logout" : "Login"}
-        </button>
+    <div className="header-container">
+      <div className="header-content">
+        <div className="nav-links">
+          {isMainPage ? (
+            <div className="links">
+              <div className="cursor-pointer">Home</div>
+              <div className="cursor-pointer">About Us</div>
+              <div className="cursor-pointer">FAQs</div>
+            </div>
+          ) : !user ? (
+            <div className="links">
+              <div className="cursor-pointer">Home</div>
+              <div className="cursor-pointer">About Us</div>
+              <div className="cursor-pointer">FAQs</div>
+            </div>
+          ) : (
+            <div>Dashboard</div>
+          )}
+        </div>
+        <div className="header-actions">
+          {user && !isMainPage && (
+            <div className="user-info">
+              <MdSearch />
+              <IoNotifications />
+              <div>{user.displayName || "User"}</div>
+              <FaUserCircle className="text-3xl" />
+            </div>
+          )}
+          <button onClick={loginLogoutHandler} className="auth-button">
+            {user ? "Logout" : "Login"}
+          </button>
+        </div>
       </div>
     </div>
   );

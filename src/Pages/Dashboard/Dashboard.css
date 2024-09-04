@@ -1,0 +1,42 @@
+/* Style for the logo */
+.logo-small {
+  margin-top: 35px;
+  width: 150px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #28396f;
+  color: white;
+  overflow-y: auto;
+  font-family: "Raleway", sans-serif; 
+}
+
+/* Sidebar button styles */
+.sidebar-button {
+  display: flex;
+  text-align: left;
+  width: 100%;
+  padding: 1rem 1rem;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 1.05rem;
+  font-weight: bold; 
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.sidebar-button.active {
+  background-color: #314375;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 16rem; /* Match the width of the sidebar */
+  margin-top: 4rem; /* Adjust the top margin to account for the header */
+  padding: 2.5rem;
+  flex-grow: 1;
+  background-color: #f0f0f0; /* Light background for the content area */
+}
