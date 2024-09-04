@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig"; // Import auth from firebaseConfig
+import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
+import { db } from "../../firebaseConfig"; // Import Firestore instance
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
@@ -41,7 +43,14 @@ function SignUpForm() {
       const user = userCredential.user;
       console.log("User created:", user);
 
-      // Optionally, save additional user info (username, phone, userType) to Firebase Firestore or Realtime Database
+      // Add user to Firestore "Users" collection
+      await setDoc(doc(db, "Users", user.uid), {
+        email: user.email,
+        username: formData.username,
+        phone: formData.phone,
+        userType: formData.userType,
+      });
+      console.log("User added to Firestore");
 
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {

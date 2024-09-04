@@ -13,27 +13,41 @@ const Header = ({ isMainPage }) => {
 
   useEffect(() => {
     // Set up Firebase Auth listener
+    console.log("Setting up Firebase Auth listener...");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        console.log("User logged in:", currentUser);
         setUser(currentUser);
       } else {
+        console.log("No user logged in");
         setUser(null);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      console.log("Cleaning up Firebase Auth listener");
+      unsubscribe();
+    };
   }, []);
 
   const loginLogoutHandler = () => {
     if (user) {
+      console.log("Logging out user:", user.email);
       signOut(auth)
         .then(() => {
+          // Update local storage after logout
+          console.log("Logging out successful");
+          localStorage.setItem("isLoggedIn", "false");
+          localStorage.removeItem("useremail");
+
+          // Navigate to sign-in page
           navigate("/signin");
         })
         .catch((error) => {
           console.error("Error signing out: ", error);
         });
     } else {
+      console.log("No user logged in. Redirecting to sign-in.");
       navigate("/signin");
     }
   };
