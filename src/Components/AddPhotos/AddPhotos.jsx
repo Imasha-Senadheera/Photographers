@@ -1,192 +1,181 @@
-import React from "react";
-import { AiFillInstagram } from "react-icons/ai";
-import { FaFacebook, FaWhatsapp } from "react-icons/fa";
-import { cardsData } from "../../Constants/MockData";
-import ImageCard from "../ImageCard/ImageCard";
-import { IoIosAddCircle } from "react-icons/io";
-// import Footer from '../Footer/Footer';
+import React, { useState } from "react"; // Remove useEffect
+import { IoIosAddCircle } from "react-icons/io"; // Import IoIosAddCircle icon
+import { db } from "../../firebaseConfig"; // Import Firestore instance
+import { useNavigate } from "react-router-dom";
+import ImageCard from "../ImageCard/ImageCard"; // Import ImageCard component
+import { cardsData } from "../../Constants/MockData"; // Import cardsData
+import { doc, setDoc } from "firebase/firestore"; // Update this import
+
+const sriLankanDistricts = [
+  "Colombo",
+  "Gampaha",
+  "Kalutara",
+  "Kandy",
+  "Matale",
+  "Nuwara Eliya",
+  "Galle",
+  "Matara",
+  "Hambantota",
+  "Jaffna",
+  "Kilinochchi",
+  "Mannar",
+  "Vavuniya",
+  "Mullaitivu",
+  "Batticaloa",
+  "Ampara",
+  "Trincomalee",
+  "Kurunegala",
+  "Puttalam",
+  "Anuradhapura",
+  "Polonnaruwa",
+  "Badulla",
+  "Moneragala",
+  "Ratnapura",
+  "Kegalle",
+];
 
 const AddPhotos = () => {
+  const [formData, setFormData] = useState({
+    packageName: "",
+    packageDescription: "",
+    price: "",
+    duration: "",
+    category: "",
+    location: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const packageRef = doc(db, "packages", formData.packageName);
+      await setDoc(packageRef, formData); // Use setDoc instead of updateDoc
+      console.log("Package data added to Firestore");
+      navigate("/profile");
+    } catch (error) {
+      setError("Error adding package data: " + error.message);
+      console.error("Error adding package data:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row gap-9 p-8 bg-light-blue h-screen">
-      {/* Profile Form */}
       <div className="flex-1 max-h-full overflow-y-auto">
-        <p className="text-blue-700 font-semibold text-xl mb-4">Profile</p>
-        <form className="space-y-6">
+        <h1 className="text-blue-700 font-semibold text-xl mb-4">
+          Package Details
+        </h1>
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            <div className="flex gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your first name"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your last name"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-            </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Organization Name
+                Package Name
               </label>
               <input
                 type="text"
-                placeholder="Enter your organization name"
+                name="packageName"
+                placeholder="Enter package name"
+                value={formData.packageName}
+                onChange={handleChange}
                 className="border rounded px-4 py-2 w-full border-gray-400"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="border rounded px-4 py-2 w-full border-gray-400"
-              />
-            </div>
-
-            {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Change Password
-              </label>
-              <input
-                type="password"
-                placeholder="Enter a new password"
-                className="border rounded px-4 py-2 w-full"
-              />
-            </div> */}
-
-            <div className="flex gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Add Profile Photo
-                </label>
-                <div className="relative">
-                  <input
-                    type="file"
-                    id="fileInput"
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    onChange={(e) => {
-                      const fileName = e.target.files[0]?.name || "";
-                      document.getElementById("fileInputText").value = fileName;
-                    }}
-                  />
-                  <input
-                    type="text"
-                    id="fileInputText"
-                    placeholder="Select a file"
-                    className="border rounded px-4 py-2 w-full cursor-pointer border-gray-400"
-                    readOnly
-                    onClick={() => document.getElementById("fileInput").click()}
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Experience
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your experience"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your category"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Contact Number
-                </label>
-                <input
-                  type="tel"
-                  placeholder="Enter your contact number"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Min Price
-                </label>
-                <input
-                  type="number"
-                  placeholder="Enter the minimum price"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Max Price
-                </label>
-                <input
-                  type="number"
-                  placeholder="Enter the maximum price"
-                  className="border rounded px-4 py-2 w-full border-gray-400"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Description
+                Package Description
               </label>
               <textarea
-                placeholder="Enter a description"
+                name="packageDescription"
+                placeholder="Enter package description"
+                value={formData.packageDescription}
+                onChange={handleChange}
                 className="border rounded px-4 py-2 w-full border-gray-400"
                 rows="4"
               ></textarea>
             </div>
-          </div>
 
-          <div className="flex gap-4 mt-4 justify-center flex-wrap">
-            <button className="bg-white rounded-full p-2 flex items-center gap-2 text-blue-700 border border-gray-300 hover:bg-gray-100 text-sm">
-              <FaFacebook /> Connected
-            </button>
-            <button className="bg-white rounded-full p-2 flex items-center gap-2 text-green-500 border border-gray-300 hover:bg-gray-100 text-sm">
-              <FaWhatsapp /> Connect
-            </button>
-            <button className="bg-white rounded-full p-2 flex items-center gap-2 text-pink-500 border border-gray-300 hover:bg-gray-100 text-sm">
-              <AiFillInstagram /> Connect
-            </button>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Price (Rs.)
+              </label>
+              <input
+                type="number"
+                name="price"
+                placeholder="Enter price in Rs."
+                value={formData.price}
+                onChange={handleChange}
+                className="border rounded px-4 py-2 w-full border-gray-400"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Duration
+              </label>
+              <input
+                type="text"
+                name="duration"
+                placeholder="Enter duration (e.g., hours, days)"
+                value={formData.duration}
+                onChange={handleChange}
+                className="border rounded px-4 py-2 w-full border-gray-400"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Category
+              </label>
+              <input
+                type="text"
+                name="category"
+                placeholder="Enter category (e.g., wedding, portrait)"
+                value={formData.category}
+                onChange={handleChange}
+                className="border rounded px-4 py-2 w-full border-gray-400"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Location
+              </label>
+              <select
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="border rounded px-4 py-2 w-full border-gray-400"
+              >
+                <option value="" disabled>
+                  Select a district
+                </option>
+                {sriLankanDistricts.map((district) => (
+                  <option key={district} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className="flex justify-center mt-4">
-            <button className="bg-blue-900 text-white rounded-full w-32 h-10 text-sm">
+            <button
+              type="submit"
+              className="bg-blue-900 text-white rounded-full w-32 h-10 text-sm"
+            >
               Save
             </button>
           </div>
         </form>
+
+        {error && <p className="text-red-500 mt-4">{error}</p>}
       </div>
 
       {/* Add Photos Section */}

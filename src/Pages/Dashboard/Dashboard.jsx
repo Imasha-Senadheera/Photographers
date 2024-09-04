@@ -62,7 +62,7 @@ const Dashboard = () => {
             }`}
             onClick={() => handleButtonClick("My Profile")}
           >
-            My Profile
+            Edit Profile
           </button>
           <button
             className={`sidebar-button ${
@@ -70,7 +70,7 @@ const Dashboard = () => {
             }`}
             onClick={() => handleButtonClick("Add Photos")}
           >
-            Add Photos
+            Add Packages
           </button>
           <button
             className={`sidebar-button ${

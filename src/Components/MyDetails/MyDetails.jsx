@@ -1,7 +1,32 @@
-import React from "react";
-import Footer from "../../Components/Footer/Footer"; 
+import React, { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebaseConfig";
+import Footer from "../../Components/Footer/Footer";
 
 const MyDetails = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userDoc = doc(db, "Users", user.uid);
+          const userSnapshot = await getDoc(userDoc);
+          if (userSnapshot.exists()) {
+            setUserData(userSnapshot.data());
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (!userData) return <p>Loading...</p>;
+
   return (
     <div className="p-8 bg-light-blue min-h-screen flex flex-col">
       <div className="flex-grow">
@@ -11,35 +36,31 @@ const MyDetails = () => {
         <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
           <div className="mb-4">
             <p className="text-lg font-semibold">Full Name:</p>
-            <p className="text-gray-700">John Doe</p>
+            <p className="text-gray-700">{`${userData.firstName} ${userData.lastName}`}</p>
           </div>
           <div className="mb-4">
             <p className="text-lg font-semibold">Email:</p>
-            <p className="text-gray-700">john.doe@example.com</p>
+            <p className="text-gray-700">{userData.email}</p>
           </div>
           <div className="mb-4">
             <p className="text-lg font-semibold">Organization:</p>
-            <p className="text-gray-700">Example Corp</p>
+            <p className="text-gray-700">{userData.organizationName}</p>
           </div>
           <div className="mb-4">
             <p className="text-lg font-semibold">Contact Number:</p>
-            <p className="text-gray-700">+123 456 7890</p>
+            <p className="text-gray-700">{userData.contactNumber}</p>
           </div>
           <div className="mb-4">
             <p className="text-lg font-semibold">Experience:</p>
-            <p className="text-gray-700">5 years in web development</p>
+            <p className="text-gray-700">{userData.experience}</p>
           </div>
           <div className="mb-4">
             <p className="text-lg font-semibold">Category:</p>
-            <p className="text-gray-700">Web Developer</p>
+            <p className="text-gray-700">{userData.category}</p>
           </div>
           <div>
             <p className="text-lg font-semibold">Description:</p>
-            <p className="text-gray-700">
-              Experienced web developer with a passion for creating beautiful
-              and functional websites. Adept at working with various
-              technologies and frameworks.
-            </p>
+            <p className="text-gray-700">{userData.description}</p>
           </div>
         </div>
       </div>
