@@ -8,6 +8,7 @@ import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import facebookImage from "../../Assests/facebook.png";
 import googleImage from "../../Assests/google.png";
+import { updateProfile } from "firebase/auth";
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -42,6 +43,12 @@ function SignUpForm() {
       );
       const user = userCredential.user;
       console.log("User created:", user);
+
+      // Update the user's display name
+      await updateProfile(user, {
+        displayName: formData.username,
+      });
+      console.log("User profile updated");
 
       // Add user to Firestore "Users" collection
       await setDoc(doc(db, "Users", user.uid), {

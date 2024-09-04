@@ -77,7 +77,7 @@ const Header = ({ isMainPage }) => {
             <div className="user-info">
               <MdSearch />
               <IoNotifications />
-              <div>{user.displayName || "User"}</div>
+              <div>{user.displayName || "User"}</div> {/* Display username */}
               <FaUserCircle className="text-3xl" />
             </div>
           )}
