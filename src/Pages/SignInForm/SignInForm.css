@@ -30,11 +30,11 @@ body {
 }
 
 .logo {
-  width: 200px;
+  width: 100px;
   height: auto;
   position: absolute;
-  top: 40px;
-  left: 60px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 /* Text content styling */

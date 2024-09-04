@@ -37,7 +37,9 @@
   border-radius: 5px;
   border: none;
   font-size: 1rem;
+  color: #333; 
 }
+
 
 .msearch-bar select,
 .msearch-bar button {
