@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { auth } from "../firebaseConfig"; // Adjust the import based on your project structure
+import { auth } from "../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import LoadingSpinner from "../Components/LoadingSpinner/LoadingSpinner"; // Adjust path if necessary
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,7 +18,7 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Consider adding a spinner or loading animation
+    return <LoadingSpinner />;
   }
 
   return isAuthenticated ? children : <Navigate to="/signin" />;

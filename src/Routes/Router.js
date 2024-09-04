@@ -5,7 +5,7 @@ import SignInForm from "../Pages/SignInForm/SignInForm";
 import SignUpForm from "../Pages/SignUpForm/SignUpForm";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import CustomerDashboard from "../Pages/Dashboard/CustomerDashboard";
-import PhotographerListPage from "../Components/PhotographerList/PhotographerList";
+import PhotographerListPage from "../Components/PhotographerList/PhotographerList"; // Ensure this path is correct
 import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
@@ -30,8 +30,7 @@ const Router = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/photographers" element={<PhotographerListPage />} />{" "}
-      {/* Added Route for PhotographerListPage */}
+      <Route path="/photographers" element={<PhotographerListPage />} />
     </Routes>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PhotographerCard from "../PhotographerCard/PhotographerCard";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./PhotographerList.css";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
@@ -56,12 +57,7 @@ const PhotographerList = ({ searchParams }) => {
   });
 
   if (loading) {
-    return (
-      <div className="loading-container">
-        <p className="loading-text">Loading packages...</p>
-        <div className="loading-spinner"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {

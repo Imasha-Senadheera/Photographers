@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import ImageCard from "../../Components/ImageCard/ImageCard";
 import Cover from "../../Assests/Cover.png";
 import Logo from "../../Assests/logo.png";
@@ -10,12 +11,15 @@ import { CiHeart } from "react-icons/ci";
 import "./Home.css";
 
 const Home = () => {
+  const location = useLocation(); // Use useLocation to get the state
+  const photographer = location.state?.photographer; // Get photographer details from state
+
   const [reviews, setReviews] = useState([
     "Review 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "Review 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "Review 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   ]);
-  const [reviewIndex, setReviewIndex] = useState(0); // Initialize reviewIndex
+  const [reviewIndex, setReviewIndex] = useState(0);
   const [newReview, setNewReview] = useState("");
   const [liked, setLiked] = useState(false);
   const [packages, setPackages] = useState([]);
@@ -71,9 +75,12 @@ const Home = () => {
             <div className="flex items-center gap-5 pb-5 mb-8">
               <FaUserCircle className="text-6xl" />
               <div>
-                <p className="text-2xl font-semibold">Pasindu Maneesha</p>
-                <p className="text-sm">Organization Name</p>
-                <p className="text-sm">Location</p>
+                <p className="text-2xl font-semibold">
+                  {photographer?.packageName || "Photographer Name"}
+                </p>
+                <p className="text-sm">
+                  {photographer?.location || "Location"}
+                </p>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4 mb-20">
