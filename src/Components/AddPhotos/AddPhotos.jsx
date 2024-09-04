@@ -46,6 +46,7 @@ const AddPhotos = () => {
   const [samplePhotos, setSamplePhotos] = useState([]);
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -64,6 +65,7 @@ const AddPhotos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true
     try {
       // Handle cover photo upload
       let coverPhotoUrl = "";
@@ -97,6 +99,8 @@ const AddPhotos = () => {
     } catch (error) {
       setError("Error adding package data: " + error.message);
       console.error("Error adding package data:", error);
+    } finally {
+      setLoading(false); // Set loading to false
     }
   };
 
@@ -211,6 +215,13 @@ const AddPhotos = () => {
         </form>
 
         {error && <p className="text-red-500 mt-4">{error}</p>}
+        {loading && (
+          <div className="flex justify-center items-center mt-4">
+            <p className="text-blue-700">Uploading package information...</p>
+            <div className="ml-2 border-t-4 border-blue-900 border-solid rounded-full w-6 h-6 animate-spin"></div>{" "}
+            {/* Simple spinner */}
+          </div>
+        )}
       </div>
 
       <div className="flex-1 max-h-full overflow-y-auto">

@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import ImageCard from "../../Components/ImageCard/ImageCard";
 import Cover from "../../Assests/Cover.png";
+import Logo from "../../Assests/logo.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
-import Logo from "../../Assests/logo.png";
-import { cardsData } from "../../Constants/MockData";
-import ImageCard from "../../Components/ImageCard/ImageCard";
 import "./Home.css";
 
 const Home = () => {
-  const [reviewIndex, setReviewIndex] = useState(0);
   const [reviews, setReviews] = useState([
     "Review 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "Review 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "Review 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   ]);
+  const [reviewIndex, setReviewIndex] = useState(0); // Initialize reviewIndex
   const [newReview, setNewReview] = useState("");
   const [liked, setLiked] = useState(false);
+  const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const packagesCollection = collection(db, "packages");
+        const packageSnapshot = await getDocs(packagesCollection);
+        const packageList = packageSnapshot.docs.map((doc) => doc.data());
+        setPackages(packageList);
+      } catch (error) {
+        console.error("Error fetching packages:", error);
+      }
+    };
+
+    fetchPackages();
+  }, []);
 
   const handlePrevReview = () => {
     setReviewIndex((prevIndex) =>
@@ -60,12 +77,12 @@ const Home = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4 mb-20">
-              {cardsData.map((item) => (
-                <ImageCard
-                  key={item.id}
-                  imageUrl={item.imageUrl}
-                  add={item.add}
-                />
+              {packages.map((pkg, index) => (
+                <React.Fragment key={index}>
+                  {pkg.samplePhotos.map((photoUrl, photoIndex) => (
+                    <ImageCard key={photoIndex} imageUrl={photoUrl} />
+                  ))}
+                </React.Fragment>
               ))}
             </div>
           </div>
@@ -178,7 +195,7 @@ const Home = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="reviewModalLabel">
-                Add a Review
+                Add Review
               </h5>
               <button
                 type="button"
@@ -188,13 +205,13 @@ const Home = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <input
-                type="text"
+              <textarea
                 value={newReview}
                 onChange={(e) => setNewReview(e.target.value)}
                 className="form-control"
-                placeholder="Enter your review"
-              />
+                rows="4"
+                placeholder="Write your review here..."
+              ></textarea>
             </div>
             <div className="modal-footer">
               <button
@@ -208,7 +225,6 @@ const Home = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleAddReview}
-                data-bs-dismiss="modal"
               >
                 Add Review
               </button>
@@ -216,28 +232,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      <footer className="w-full bg-light-blue text-black py-8 mt-10">
-        <div className="container mx-auto px-4">
-          <hr className="border-blue-300 mt-6 mb-4" />
-          <p className="text-center text-sm text-black mb-2">
-            © 2024 Group 09 - BIT 03 - Final Project. All rights
-          </p>
-          <p className="text-center text-sm text-black">
-            <a href="/terms" className="hover:text-blue-700 transition-colors">
-              Terms and Conditions
-            </a>{" "}
-            |
-            <a
-              href="/privacy"
-              className="hover:text-blue-700 transition-colors"
-            >
-              {" "}
-              Privacy Policy
-            </a>
-          </p>
-        </div>
-      </footer>
     </>
   );
 };
