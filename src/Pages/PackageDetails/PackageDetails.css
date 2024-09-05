@@ -12,7 +12,7 @@ body {
   width: 150px;
   height: auto;
   position: absolute;
-  top: 20px;
+  top: 50px;
   left: 40px;
   object-fit: contain;
 }
@@ -41,3 +41,10 @@ body {
   color: #1e88e5;
   transition: color 0.3s;
 }
+
+.photographer-list {
+  justify-content: space-between;
+  padding: 10px;
+  gap: 10px;
+  margin-top: 15px;
+ }
