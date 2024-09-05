@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import "./Header.css"; 
+import "./Header.css";
 
 const Header = ({ isMainPage }) => {
   const [user, setUser] = useState(null);

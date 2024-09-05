@@ -20,14 +20,14 @@
 }
 
 .nav-links {
-  flex-grow: 2; 
+  flex-grow: 2;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .links {
   display: flex;
-  gap: 2rem; 
+  gap: 2rem;
 }
 
 .header-actions {
@@ -37,13 +37,18 @@
 }
 
 .auth-button {
-  background-color: #1e40af;
+  background-color: #1844bc;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s; 
+}
+
+.auth-button:hover {
+  background-color: #0a3d8e; 
 }
 
 .user-info {

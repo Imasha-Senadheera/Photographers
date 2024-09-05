@@ -66,16 +66,11 @@
 }
 
 .msearch-bar button {
-  background-color: #1e40af; 
+  background-color: #1844bc; 
   color: white;
   cursor: pointer;
 }
 
 .msearch-bar button:hover {
-  background-color: rgba(
-    41,
-    41,
-    212,
-    0.7
-  ); 
+  background-color: #0a3d8e;
 }
