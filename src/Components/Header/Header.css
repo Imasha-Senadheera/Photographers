@@ -5,7 +5,7 @@
   right: 0;
   background-color: black;
   color: white;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .header-content {
@@ -15,19 +15,19 @@
   padding: 0 1.5rem;
   font-weight: bold;
   font-size: 1.05rem;
-  font-family: "Raleway", sans-serif; 
-  height: 5rem; 
+  font-family: "Raleway", sans-serif;
+  height: 5rem;
 }
 
 .nav-links {
-  flex-grow: 1;
+  flex-grow: 2; 
   display: flex;
-  justify-content: center;
+  justify-content: center; 
 }
 
 .links {
   display: flex;
-  gap: 1rem;
+  gap: 2rem; 
 }
 
 .header-actions {
@@ -37,10 +37,10 @@
 }
 
 .auth-button {
-  background-color: #1e40af; 
+  background-color: #1e40af;
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 9999px; 
+  border-radius: 9999px;
   border: none;
   cursor: pointer;
   font-weight: bold;

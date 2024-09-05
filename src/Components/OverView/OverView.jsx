@@ -3,47 +3,38 @@ import Chart from "../../Components/OverviewComponents/Chart";
 import TodoList from "../../Components/OverviewComponents/TodoList";
 import MyCalendar from "../../Components/OverviewComponents/Calendar";
 import Footer from "../Footer/Footer";
+import "./OverView.css"; // Import the CSS file
 
 const OverView = () => {
   return (
-    <div className="bg-light-blue flex flex-col min-h-screen">
-      <div className="flex-grow bg-light-blue px-32 pb-32">
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <div className="bg-white border-2 border-blue-700 rounded-lg p-5">
-            <p className="text-gray-500 font-semibold text-center">
-              Uploaded Photos
-            </p>
-            <p className="text-black font-semibold text-2xl my-3 text-center">
-              60
-            </p>
+    <div className="overview-container">
+      <div className="content-container">
+        <div className="stats-grid">
+          <div className="stats-box">
+            <p className="stats-label">Uploaded Photos</p>
+            <p className="stats-number">60</p>
           </div>
-          <div className="bg-white border-2 border-blue-700 rounded-lg p-5">
-            <p className="text-gray-500 font-semibold text-center">Views</p>
-            <p className="text-black font-semibold text-2xl my-3 text-center">
-              16
-            </p>
+          <div className="stats-box">
+            <p className="stats-label">Views</p>
+            <p className="stats-number">16</p>
           </div>
-          <div className="bg-white border-2 border-blue-700 rounded-lg p-5">
-            <p className="text-gray-500 font-semibold text-center">Likes</p>
-            <p className="text-black font-semibold text-2xl my-3 text-center">
-              43
-            </p>
+          <div className="stats-box">
+            <p className="stats-label">Likes</p>
+            <p className="stats-number">43</p>
           </div>
-          <div className="bg-white border-2 border-blue-700 rounded-lg p-5">
-            <p className="text-gray-500 font-semibold text-center">Ratings</p>
-            <p className="text-black font-semibold text-2xl my-3 text-center">
-              64
-            </p>
+          <div className="stats-box">
+            <p className="stats-label">Ratings</p>
+            <p className="stats-number">64</p>
           </div>
         </div>
 
-        {/* Add the new components below */}
+        {/* Additional Components */}
         <Chart />
         <TodoList />
         <MyCalendar />
       </div>
 
-      {/* Footer at the bottom */}
+      {/* Footer Component */}
       <Footer />
     </div>
   );
