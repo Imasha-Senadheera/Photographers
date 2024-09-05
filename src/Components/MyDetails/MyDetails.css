@@ -1,0 +1,86 @@
+.my-details-container {
+  padding: 0.2rem;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-details-content {
+  flex-grow: 1;
+  max-width: 800rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.my-details-heading {
+  color: #1d4ed8;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Input and textarea styles */
+.my-details-input,
+.my-details-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.my-details-input:focus,
+.my-details-textarea:focus {
+  border-color: #1d4ed8; 
+}
+
+/* Textarea specific styling */
+.my-details-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.my-details-update-button,
+.my-details-cancel-button {
+  background-color: #1844bc; 
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px; 
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 90px; 
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+}
+
+/* Add hover effect */
+.my-details-update-button:hover,
+.my-details-cancel-button:hover {
+  background-color: #0a3d8e; 
+  transform: scale(1.05); 
+}
+
+/* Button alignment for better layout */
+.my-details-buttons {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.my-details-cancel-button {
+  background-color: #f44336; 
+}
+
+.my-details-cancel-button:hover {
+  background-color: #e53935; 
+}
