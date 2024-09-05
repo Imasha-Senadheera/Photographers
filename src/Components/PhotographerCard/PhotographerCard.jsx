@@ -14,7 +14,7 @@ const PhotographerCard = ({ photographer }) => {
   };
 
   return (
-    <div className="photographer-card" onClick={handleCardClick}>
+    <div className="photographer-card hover:drop-shadow-lg cursor-grab" onClick={handleCardClick}>
       <img src={imageSrc} alt={photographer.packageName} />
       <div className="photographer-info">
         <h3>{photographer.packageName}</h3>
