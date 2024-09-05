@@ -1,244 +1,173 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
-import { useLocation } from "react-router-dom"; 
+import { db } from "../../firebaseConfig"; // Removed unused imports
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
 import ImageCard from "../../Components/ImageCard/ImageCard";
 import Cover from "../../Assests/Cover.png";
 import Logo from "../../Assests/logo.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
-import { CiHeart } from "react-icons/ci";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
 import "./PackageDetails.css";
 
 const PackageDetails = () => {
-  const location = useLocation(); // Use useLocation to get the state
-  const photographer = location.state?.photographer; // Get photographer details from state
+  const location = useLocation();
+  const photographer = location.state?.photographer;
 
-  const [reviews, setReviews] = useState([
-    "Review 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Review 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Review 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  ]);
-  const [reviewIndex, setReviewIndex] = useState(0);
-  const [newReview, setNewReview] = useState("");
-  const [liked, setLiked] = useState(false);
   const [packages, setPackages] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
         const packagesCollection = collection(db, "packages");
         const packageSnapshot = await getDocs(packagesCollection);
-        const packageList = packageSnapshot.docs.map((doc) => doc.data());
-        setPackages(packageList);
+        const packageList = packageSnapshot.docs
+          .map((doc) => doc.data())
+          .filter((pkg) => pkg.samplePhotos && pkg.samplePhotos.length > 0);
+
+        const allPhotos = packageList.flatMap((pkg) => pkg.samplePhotos);
+        const limitedPhotos = allPhotos.slice(0, 6);
+        setPackages(limitedPhotos);
+
+        console.log("Fetched packages:", limitedPhotos); // Debugging log
       } catch (error) {
         console.error("Error fetching packages:", error);
       }
     };
 
+    const fetchUserData = async () => {
+      try {
+        if (!photographer?.id) {
+          console.error("Photographer ID is missing.");
+          return;
+        }
+
+        const userDoc = doc(db, "users", photographer.id); // Corrected collection name
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+          const userData = userSnapshot.data();
+          setUserData(userData);
+          console.log("Fetched user data:", userData); // Debugging log
+        } else {
+          console.log("No user data found for ID:", photographer.id); // Debugging log
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchPackages();
-  }, []);
-
-  const handlePrevReview = () => {
-    setReviewIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : reviews.length - 1
-    );
-  };
-
-  const handleNextReview = () => {
-    setReviewIndex((prevIndex) =>
-      prevIndex < reviews.length - 1 ? prevIndex + 1 : 0
-    );
-  };
-
-  const handleAddReview = () => {
-    if (newReview.trim()) {
-      setReviews([...reviews, `Review ${reviews.length + 1}: ${newReview}`]);
-      setNewReview(""); // Clear the input field
+    if (photographer) {
+      fetchUserData();
     }
-  };
-
-  const handleLike = () => {
-    setLiked(!liked);
-  };
+  }, [photographer]);
 
   return (
     <>
-      <div className="w-full h-80 relative bg-light-blue">
-        <img src={Cover} alt="Cover" className="w-full h-full object-cover" />
-        <img src={Logo} alt="Logo" className="home-logo" />
+      <Header />
+      <div className="relative w-full h-80 bg-light-blue">
+        <img
+          src={Cover}
+          alt="Cover"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <img src={Logo} alt="Logo" className="absolute top-4 left-4 w-32" />
       </div>
-
-      <div className="flex bg-light-blue">
-        <div className="flex mx-[10%] gap-16 w-full min-h-screen p-10">
-          <div className="w-[70%]">
-            <div className="flex items-center gap-5 pb-5 mb-8">
-              <FaUserCircle className="text-6xl" />
-              <div>
-                <p className="text-2xl font-semibold">
-                  {photographer?.packageName || "Photographer Name"}
-                </p>
-                <p className="text-sm">
-                  {photographer?.location || "Location"}
-                </p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 lg:p-10 bg-light-blue">
+        <div className="lg:col-span-2 flex flex-col gap-6 ml-6 lg:ml-10">
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <div className="flex items-center gap-5">
+                <div className="w-24 h-24 relative">
+                  {photographer?.profilePicture ? (
+                    <img
+                      src={photographer.profilePicture}
+                      alt="Profile"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <FaUserCircle className="text-6xl text-gray-400 w-full h-full" />
+                  )}
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">
+                    {photographer?.organizationName || "Organization Name"}
+                  </p>
+                  <p className="text-sm">
+                    {photographer?.location || "Location"}
+                  </p>
+                </div>
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {packages.length > 0 ? (
+                  packages.map((photoUrl, index) => (
+                    <ImageCard key={index} imageUrl={photoUrl} />
+                  ))
+                ) : (
+                  <p>No photos available</p>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="lg:col-span-1 flex flex-col gap-6 mr-16">
+          <div className="bg-white p-4 border-2 border-blue-700 rounded-lg">
+            <div className="mb-4">
+              <p className="text-xl font-bold text-blue-700">About</p>
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                userData && (
+                  <ul className="list-disc pl-5 mt-2 text-sm">
+                    <li>Package Name: {userData.packageName || "N/A"}</li>
+                    <li>Description: {userData.packageDescription || "N/A"}</li>
+                    <li>Price: {userData.price || "N/A"}</li>
+                    <li>Duration: {userData.duration || "N/A"}</li>
+                    <li>Category: {userData.category || "N/A"}</li>
+                    <li>Location: {userData.location || "N/A"}</li>
+                  </ul>
+                )
+              )}
             </div>
-            <div className="grid grid-cols-3 gap-4 mb-20">
-              {packages.map((pkg, index) => (
-                <React.Fragment key={index}>
-                  {pkg.samplePhotos.map((photoUrl, photoIndex) => (
-                    <ImageCard key={photoIndex} imageUrl={photoUrl} />
-                  ))}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-          <div className="w-[30%] font-semibold">
-            <div className="flex gap-5 mb-10">
-              <button
-                onClick={handleLike}
-                className={`flex gap-3 items-center justify-center bg-white text-black rounded w-full h-10 border-2 ${
-                  liked ? "border-red-400" : "border-blue-700"
-                }`}
-              >
-                <CiHeart
-                  className={`text-red-400 ${liked ? "text-red-500" : ""}`}
-                />
-                {liked ? "Liked" : "Like"}
-              </button>
-              <button
-                className="bg-blue-900 text-white rounded-lg w-full h-10"
-                data-bs-toggle="modal"
-                data-bs-target="#reviewModal"
-              >
-                Add Review
-              </button>
-            </div>
-            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
-              <p className="text-xl text-blue-700 font-bold">About</p>
-              <ul className="text-sm mt-2 list-disc pl-5">
-                <li>Joined on: 01/25/2022</li>
-                <li>Jobs done: 5</li>
-                <li>Experience: 2 years</li>
-                <li>Price range: Rs. 80,000 - Rs. 120,000</li>
-                <li>Category: Wedding, Birthdays, Party</li>
-              </ul>
-            </div>
-            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
-              <p className="text-xl text-blue-700 font-bold">Social Links</p>
-              <div className="flex gap-5 text-4xl mt-2 text-[#003366]">
-                <a href="https://facebook.com" aria-label="Facebook">
+
+            <div className="mb-4">
+              <p className="text-xl font-bold text-blue-700">Social Links</p>
+              <div className="flex gap-4 text-2xl text-[#003366] mt-2">
+                <a
+                  href={userData?.facebook || "https://facebook.com"}
+                  aria-label="Facebook"
+                >
                   <FaFacebook />
                 </a>
-                <a href="https://whatsapp.com" aria-label="WhatsApp">
+                <a
+                  href={userData?.whatsapp || "https://whatsapp.com"}
+                  aria-label="WhatsApp"
+                >
                   <FaWhatsapp />
                 </a>
-                <a href="https://instagram.com" aria-label="Instagram">
+                <a
+                  href={userData?.instagram || "https://instagram.com"}
+                  aria-label="Instagram"
+                >
                   <AiFillInstagram />
                 </a>
               </div>
             </div>
-
-            <div className="my-10 p-6 border-2 border-blue-700 bg-white">
-              <p className="text-xl text-blue-700 font-bold">Description</p>
-              <p className="text-sm mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-            <div className="relative flex justify-center">
-              <div className="relative w-[400px] overflow-hidden">
-                <div className="flex">
-                  {reviews.map((review, index) => {
-                    const [reviewerName, reviewText] = review.split(":");
-                    return (
-                      <div
-                        key={index}
-                        className={`flex-shrink-0 w-[400px] p-6 border-2 border-blue-700 ${
-                          index === reviewIndex ? "block" : "hidden"
-                        } bg-white`}
-                      >
-                        <p className="text-xl text-blue-700 font-bold text-center">
-                          Customer Review
-                        </p>
-                        <p className="text-sm mt-2 text-center">
-                          <span className="font-bold">{reviewerName}:</span>{" "}
-                          {reviewText}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-                <button
-                  onClick={handlePrevReview}
-                  className="absolute top-1/2 left-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
-                >
-                  &lt;
-                </button>
-                <button
-                  onClick={handleNextReview}
-                  className="absolute top-1/2 right-[-19px] transform -translate-y-1/2 bg-blue-900 text-white rounded-full p-4 z-10"
-                >
-                  &gt;
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-
-      <hr className="border-white-300 mx-[10%] mt-14" />
-
-      {/* Review Modal */}
-      <div
-        className="modal fade"
-        id="reviewModal"
-        tabIndex="-1"
-        aria-labelledby="reviewModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="reviewModalLabel">
-                Add Review
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <textarea
-                value={newReview}
-                onChange={(e) => setNewReview(e.target.value)}
-                className="form-control"
-                rows="4"
-                placeholder="Write your review here..."
-              ></textarea>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleAddReview}
-              >
-                Add Review
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <hr className="border-white-300 mx-6 lg:mx-10 mt-14" />
+      <Footer />
     </>
   );
 };
