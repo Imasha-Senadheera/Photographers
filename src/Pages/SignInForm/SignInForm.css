@@ -21,7 +21,7 @@ body {
 /* Left section styling */
 .left-section {
   width: 50%;
-  padding: 50px;
+  padding: 40px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -29,13 +29,15 @@ body {
   position: relative;
 }
 
-.logo {
-  width: 100px;
-  height: auto;
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 20px;
-  margin-bottom: 20px;
+.ilogo {
+    width: 200px;
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 /* Text content styling */

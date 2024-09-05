@@ -79,7 +79,7 @@ function SignInForm() {
   return (
     <div className="signin-container">
       <div className="left-section">
-        <img alt="logo" className="logo" src={logoImage} />
+        <img alt="logo" className="ilogo" src={logoImage} />
         <div className="text-content">
           <h1>Sign in to</h1>
           <h2>Graphers</h2>
