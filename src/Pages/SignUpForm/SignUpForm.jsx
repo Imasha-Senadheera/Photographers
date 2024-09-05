@@ -6,8 +6,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig"; 
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
-import facebookImage from "../../Assests/facebook.png";
-import googleImage from "../../Assests/google.png";
 import { updateProfile } from "firebase/auth";
 
 function SignUpForm() {
@@ -141,13 +139,6 @@ function SignUpForm() {
           <button type="submit">Sign Up</button>
           {error && <p className="error-message">{error}</p>}
         </form>
-        <div className="social-signup">
-          <p>or continue with</p>
-          <div className="social-icons">
-            <img src={facebookImage} alt="Facebook" />
-            <img src={googleImage} alt="Google" />
-          </div>
-        </div>
       </div>
     </div>
   );
