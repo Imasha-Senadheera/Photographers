@@ -1,0 +1,67 @@
+.mylayout-container {
+  display: flex;
+  gap: 3rem; 
+  justify-content: space-between; 
+  margin-top: 2rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.calendar-container,
+.todo-container {
+  background-color: white;
+  border: 2px solid #1e40af; 
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  width: 50%; 
+}
+
+.section-title {
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.todo-input-container {
+  margin-bottom: 1rem;
+}
+
+.todo-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.todo-add-button {
+  background-color: #1e40af;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.todo-task {
+  flex: 1;
+}
+
+.todo-delete-button {
+  background: none;
+  border: none;
+  color: #e53e3e;
+  cursor: pointer;
+}

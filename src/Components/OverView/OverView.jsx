@@ -1,7 +1,6 @@
 import React from "react";
 import Chart from "../../Components/OverviewComponents/Chart";
-import TodoList from "../../Components/OverviewComponents/TodoList";
-import MyCalendar from "../../Components/OverviewComponents/Calendar";
+import MyLayout from "../../Components/OverviewComponents/MyLayout";
 import Footer from "../Footer/Footer";
 import "./OverView.css"; // Import the CSS file
 
@@ -30,8 +29,7 @@ const OverView = () => {
 
         {/* Additional Components */}
         <Chart />
-        <TodoList />
-        <MyCalendar />
+        <MyLayout />
       </div>
 
       {/* Footer Component */}
