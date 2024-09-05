@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ImageCard from "../ImageCard/ImageCard";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import "./AddPhotos.css";
 
 const sriLankanDistricts = [
   "Colombo",
@@ -46,7 +47,7 @@ const AddPhotos = () => {
   const [samplePhotos, setSamplePhotos] = useState([]);
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -256,7 +257,7 @@ const AddPhotos = () => {
         <p className="text-blue-700 font-semibold text-xl mt-6 mb-4">
           Add Cover Photo
         </p>
-        <label className="flex justify-center items-center w-full h-32 bg-white border border-gray-300 rounded cursor-pointer relative overflow-hidden">
+        <label className="flex justify-center items-center w-full h-12 bg-white border border-gray-300 rounded cursor-pointer relative overflow-hidden">
           {coverPhoto ? (
             <ImageCard
               imageUrl={URL.createObjectURL(coverPhoto)}
@@ -264,7 +265,8 @@ const AddPhotos = () => {
             />
           ) : (
             <div className="flex justify-center items-center opacity-75 w-full h-full">
-              <IoIosAddCircle className="text-3xl text-gray-500" />
+              <IoIosAddCircle className="text-xl text-gray-500" />{" "}
+              {/* Reduced icon size */}
             </div>
           )}
           <input
