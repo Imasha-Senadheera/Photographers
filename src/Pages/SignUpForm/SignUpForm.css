@@ -31,12 +31,14 @@ body {
 
 /* Logo styling */
 .logo {
-  width: 100px;
+  width: 200px;
+  width: 200px;
   height: auto;
   position: absolute;
-  margin-top: 10px;
+  top: 40px;
+  left: 60px;
+  margin-top: 20px;
   margin-left: 20px;
-  margin-bottom: 20px;
 }
 
 /* Text content styling */
@@ -82,6 +84,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 80px;
+  margin-top: 90px;
   align-items: center;
   color: white;
 }
