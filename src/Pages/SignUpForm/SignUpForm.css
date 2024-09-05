@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Raleway&family=Poppins&display=swap");
+
 /* General styles */
 body {
   margin: 0;
@@ -28,26 +31,27 @@ body {
 
 /* Logo styling */
 .logo {
-  width: 200px;
+  width: 100px;
   height: auto;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 /* Text content styling */
 .text-content {
   text-align: left;
-  font-family: "Raleway", sans-serif;
+  margin-top: 70px;
 }
 
 .text-content h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 20px 0;
 }
 
 .text-content h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
@@ -97,12 +101,11 @@ body {
 .signup-form input,
 .signup-form select {
   width: 100%;
-  padding: 15px;
-  font-size: 1rem;
+  padding: 10px;
+  font-size: 0.9rem;
   border-radius: 5px;
   border: none;
-  margin-bottom: 20px;
-  font-family: "Raleway", sans-serif;
+  margin-bottom: 15px;
   background-color: #ffffff;
   color: #333333;
 }
@@ -113,14 +116,14 @@ body {
 
 .signup-form button {
   width: 100%;
-  padding: 15px;
-  font-size: 1rem;
+  padding: 12px;
+  font-size: 0.9rem;
   background-color: #1844bc;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .signup-form button:hover {
