@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import "./Chart.css"; // Import the CSS file
 
 const data = [
   { name: "Jan", views: 400, likes: 240 },
@@ -19,9 +20,9 @@ const data = [
 
 const Chart = () => {
   return (
-    <div className="bg-white border-2 border-blue-700 rounded-lg p-5 mt-8">
-      <h2 className="text-gray-700 font-semibold text-lg mb-4">Trends</h2>
-      <ResponsiveContainer width="100%" height={300}>
+    <div className="chart-container">
+      <h2 className="chart-title">Trends</h2>
+      <ResponsiveContainer width="100%" height={200}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
