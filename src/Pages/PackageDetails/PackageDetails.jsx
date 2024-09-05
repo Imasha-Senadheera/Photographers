@@ -12,7 +12,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import "./PackageDetails.css";
 
-const PackageDetails = () => {
+const PackageDetails = (props) => {
   const location = useLocation();
   const photographer = location.state?.photographer;
 
@@ -21,19 +21,12 @@ const PackageDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("-------------------------");
+    console.log(photographer);
+    console.log("-------------------------");
     const fetchPackages = async () => {
       try {
-        const packagesCollection = collection(db, "packages");
-        const packageSnapshot = await getDocs(packagesCollection);
-        const packageList = packageSnapshot.docs
-          .map((doc) => doc.data())
-          .filter((pkg) => pkg.samplePhotos && pkg.samplePhotos.length > 0);
-
-        const allPhotos = packageList.flatMap((pkg) => pkg.samplePhotos);
-        const limitedPhotos = allPhotos.slice(0, 6);
-        setPackages(limitedPhotos);
-
-        console.log("Fetched packages:", limitedPhotos); // Debugging log
+        setPackages(photographer.samplePhotos);
       } catch (error) {
         console.error("Error fetching packages:", error);
       }
@@ -109,7 +102,7 @@ const PackageDetails = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {packages.length > 0 ? (
-                  packages.map((photoUrl, index) => (
+                  photographer.samplePhotos.map((photoUrl, index) => (
                     <ImageCard key={index} imageUrl={photoUrl} />
                   ))
                 ) : (

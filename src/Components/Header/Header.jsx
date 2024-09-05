@@ -57,6 +57,14 @@ const Header = ({ isMainPage }) => {
             </div>
             <div className="cursor-pointer">About Us</div>
             <div className="cursor-pointer">FAQs</div>
+            {user && (
+              <div
+                className="cursor-pointer"
+                onClick={() => navigate("/dashboard")}
+              >
+                Dashboard
+              </div>
+            )}
           </div>
         </div>
         <div className="header-actions">

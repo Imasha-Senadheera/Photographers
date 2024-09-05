@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
-import { db, storage } from "../../firebaseConfig";
+import { db, storage, auth } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import ImageCard from "../ImageCard/ImageCard";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "./AddPhotos.css";
 
@@ -68,6 +75,15 @@ const AddPhotos = () => {
     e.preventDefault();
     setLoading(true); // Set loading to true
     try {
+      const q = query(
+        collection(db, "Users"),
+        where("email", "==", auth.currentUser.email)
+      );
+      const docs = await getDocs(q);
+      const results = docs.docs[0]; // Get the first matching document
+      console.log("Document data:", results.data());
+      const orgName = results.data().organizationName;
+
       // Handle cover photo upload
       let coverPhotoUrl = "";
       if (coverPhoto) {
@@ -91,6 +107,7 @@ const AddPhotos = () => {
       const packageRef = doc(db, "packages", formData.packageName);
       await setDoc(packageRef, {
         ...formData,
+        organizationName: orgName,
         coverPhoto: coverPhotoUrl,
         samplePhotos: samplePhotoUrls,
       });
