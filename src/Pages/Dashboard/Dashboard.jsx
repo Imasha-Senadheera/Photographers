@@ -83,7 +83,7 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Main Content */}
-      <div className="main-content">
+      <div className="main-content bg-white">
         {activeButton === "Overview" && <OverView />}
         {activeButton === "Add Photos" && <AddPhotos />}
         {activeButton === "My Profile" && <MyDetails />}
