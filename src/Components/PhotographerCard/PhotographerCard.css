@@ -5,7 +5,7 @@
   overflow: hidden;
   width: calc(
     22% - 20px
-  ); /* Reduced width to fit 4 cards per row with spacing */
+  ); 
   margin: 10px;
   transition: transform 0.3s ease-in-out;
 }

@@ -1,11 +1,10 @@
 .photographer-list {
   justify-content: space-between;
   padding: 10px;
-  gap: 10px;
+  gap: 6px;
   margin-top: 15px;
-  margin-left: 6rem;
-  margin-right: 5rem;
  }
+ 
 
 /* Responsive Design */
 @media (max-width: 1024px) {
