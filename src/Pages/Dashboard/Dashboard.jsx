@@ -74,14 +74,6 @@ const Dashboard = () => {
           </button>
           <button
             className={`sidebar-button ${
-              activeButton === "Reviews" ? "active" : ""
-            }`}
-            onClick={() => handleButtonClick("Reviews")}
-          >
-            Reviews
-          </button>
-          <button
-            className={`sidebar-button ${
               activeButton === "Budget Calculator" ? "active" : ""
             }`}
             onClick={() => handleButtonClick("Budget Calculator")}

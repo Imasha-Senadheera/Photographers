@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ImageCard from "../../Components/ImageCard/ImageCard";
 import Cover from "../../Assests/Cover.png";
-import Logo from "../../Assests/logo.png";
+import logo from "../../Assests/logo.png";
 import { FaFacebook, FaUserCircle, FaWhatsapp } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
@@ -61,7 +61,7 @@ const PackageDetails = (props) => {
           alt="Cover"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <img src={Logo} alt="Logo" className="absolute top-4 left-4 w-32" />
+        <img src={logo} alt="Logo" className="plogo" />
       </div>
       <div className="flex flex-col gap-6 p-6 lg:p-10 bg-light-blue">
         {/* Photographer Information and Blue Card */}

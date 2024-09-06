@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./MainHeader.css";
+import logo from "../../Assests/logo.png";
 
 const districts = [
   "Colombo",
@@ -47,11 +48,13 @@ const MainHeader = ({ onSearch }) => {
 
   return (
     <header className="mheader">
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="mlogo" />
+      </div>
       <h1>CELEBRATE YOUR STORY THROUGH PHOTOGRAPHY</h1>
       <p>
-        It's simple and it's free. Connect with local photographers
-        around Sri Lanka. So what are you
-        waiting for? Let's find a photographer!
+        It's simple and it's free. Connect with local photographers around Sri
+        Lanka. So what are you waiting for? Let's find a photographer!
       </p>
       <div className="msearch-bar">
         <input

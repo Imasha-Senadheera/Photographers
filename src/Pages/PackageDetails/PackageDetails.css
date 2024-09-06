@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .bg-light-blue {
@@ -15,6 +15,13 @@ body {
   top: 50px;
   left: 40px;
   object-fit: contain;
+}
+
+.plogo {
+  position: absolute;
+  width: 160px;
+  top: 75px;
+  left: 30px;
 }
 
 /* Additional Styles */
