@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebaseConfig";
 import Footer from "../../Components/Footer/Footer";
-import "./MyDetails.css"; // Import the CSS file
+import "./MyDetails.css"; 
 
 const MyDetails = () => {
   const [userData, setUserData] = useState(null);

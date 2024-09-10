@@ -11,12 +11,20 @@
   justify-content: center;
 }
 
-.mlogo {
+/* .mlogo {
   position: absolute;
   width: 90px;
   top: 70px;
   left: 20px;
+} */
+
+.mlogo {
+  position: absolute;
+  width: 200px;
+  top: 70px;
+  left: 20px;
 }
+
 
 .mheader h1 {
   font-size: 3rem;

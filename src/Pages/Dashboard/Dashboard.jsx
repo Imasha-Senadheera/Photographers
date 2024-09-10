@@ -9,7 +9,7 @@ import MyDetails from "../../Components/MyDetails/MyDetails";
 import Reviews from "../../Components/Reviews/Reviews";
 import BudgetCal from "../../Components/BudgetCal/BudgetCal";
 import Logo from "../../Assests/logo.png";
-import "./Dashboard.css"; 
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const [activeButton, setActiveButton] = useState("Overview");
@@ -37,15 +37,11 @@ const Dashboard = () => {
 
   return (
     <div className="flex min-h-screen">
-      <Header isMainPage={false} /> 
+      <Header isMainPage={false} />
       {/* Sidebar */}
       <div className="sidebar fixed top-0 left-0 w-64 h-screen">
         <div className="py-5 px-9">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="logo-small mb-9" 
-          />
+          <img src={Logo} alt="Logo" className="logo-small mb-9" />
         </div>
         <div className="space-y-2">
           <button

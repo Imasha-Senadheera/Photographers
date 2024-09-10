@@ -22,7 +22,7 @@ const Chart = () => {
   return (
     <div className="chart-container">
       <h2 className="chart-title">Trends</h2>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />

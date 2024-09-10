@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig"; 
-import { doc, setDoc } from "firebase/firestore"; 
-import { db } from "../../firebaseConfig"; 
+import { auth } from "../../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 import "./SignUpForm.css";
 import logoImage from "../../Assests/logo.png";
 import { updateProfile } from "firebase/auth";
@@ -14,7 +14,7 @@ function SignUpForm() {
     username: "",
     email: "",
     phone: "",
-    userType: "customer", // Default value
+    userType: "customer",
     password: "",
     confirmPassword: "",
   });
@@ -59,10 +59,11 @@ function SignUpForm() {
 
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {
+      // Enhanced error handling
+      console.error("Registration error:", error);
       const errorCode = error.code;
       const errorMessage = error.message;
       setError(`Error ${errorCode}: ${errorMessage}`);
-      console.error("Registration error:", errorCode, errorMessage);
     }
   };
 

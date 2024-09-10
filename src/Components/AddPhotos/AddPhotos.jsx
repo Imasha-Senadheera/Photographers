@@ -73,15 +73,18 @@ const AddPhotos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true
+    setLoading(true);
     try {
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
       const q = query(
         collection(db, "Users"),
-        where("email", "==", auth.currentUser.email)
+        where("email", "==", user.email)
       );
       const docs = await getDocs(q);
-      const results = docs.docs[0]; // Get the first matching document
-      console.log("Document data:", results.data());
+      const results = docs.docs[0];
       const orgName = results.data().organizationName;
 
       // Handle cover photo upload
@@ -90,7 +93,6 @@ const AddPhotos = () => {
         const coverPhotoRef = ref(storage, `coverPhotos/${coverPhoto.name}`);
         await uploadBytes(coverPhotoRef, coverPhoto);
         coverPhotoUrl = await getDownloadURL(coverPhotoRef);
-        console.log("Cover Photo URL:", coverPhotoUrl);
       }
 
       // Handle sample photos upload
@@ -100,7 +102,6 @@ const AddPhotos = () => {
         await uploadBytes(photoRef, photo);
         const photoUrl = await getDownloadURL(photoRef);
         samplePhotoUrls.push(photoUrl);
-        console.log("Sample Photo URL:", photoUrl);
       }
 
       // Save package data to Firestore
@@ -112,13 +113,11 @@ const AddPhotos = () => {
         samplePhotos: samplePhotoUrls,
       });
 
-      console.log("Package data added to Firestore");
-      navigate("/"); // Redirect to the homepage
+      navigate("/");
     } catch (error) {
       setError("Error adding package data: " + error.message);
-      console.error("Error adding package data:", error);
     } finally {
-      setLoading(false); // Set loading to false
+      setLoading(false);
     }
   };
 
@@ -247,7 +246,7 @@ const AddPhotos = () => {
           Add Sample Photos
         </p>
         <div className="grid grid-cols-3 gap-4 mb-4">
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: 8 }).map((_, index) => (
             <label
               key={index}
               className="flex justify-center items-center h-32 bg-white border border-gray-300 rounded cursor-pointer relative overflow-hidden"

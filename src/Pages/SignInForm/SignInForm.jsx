@@ -17,19 +17,14 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Form submitted"); // Log to indicate form submission
-    console.log("Form Data:", formData); // Log form data
-
     if (!formData.email || !formData.password) {
       setError("Please fill in all fields.");
-      console.log("Error: Please fill in all fields.");
       return;
     }
 
     const auth = getAuth();
 
     try {
-      console.log("Attempting to sign in with Firebase..."); // Log attempt to sign in
       const userCredential = await signInWithEmailAndPassword(
         auth,
         formData.email,
@@ -41,25 +36,9 @@ function SignInForm() {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("useremail", user.email);
 
-      console.log("Login successful!"); // Log successful login
-      console.log("User:", user); // Log user details
-      console.log(
-        "LocalStorage - isLoggedIn:",
-        localStorage.getItem("isLoggedIn")
-      );
-      console.log(
-        "LocalStorage - useremail:",
-        localStorage.getItem("useremail")
-      );
-
-      navigate("/dashboard"); // Adjust the path based on your app's routing
+      navigate("/dashboard");
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-
-      console.error("Login error:", errorCode, errorMessage); // Log error details
-
-      switch (errorCode) {
+      switch (error.code) {
         case "auth/invalid-email":
           setError("Invalid email address.");
           break;
@@ -70,7 +49,7 @@ function SignInForm() {
           setError("Incorrect password.");
           break;
         default:
-          setError(`Error: ${errorMessage}`);
+          setError(`Error: ${error.message}`);
           break;
       }
     }
